@@ -1,2 +1,4 @@
 *.test.*
 src/index.js
+node_modules/*
+dist/*
