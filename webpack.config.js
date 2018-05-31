@@ -6,7 +6,7 @@ module.exports = {
   entry: { main: './src/index.js' },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   module: {
     rules: [
@@ -14,10 +14,10 @@ module.exports = {
         test: /\.js[x]?$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader'
-        }
-      }
-    ]
+          loader: 'babel-loader',
+        },
+      },
+    ],
   },
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -26,17 +26,17 @@ module.exports = {
       Components: path.resolve(__dirname, 'src/Components'),
       reducers: path.resolve(__dirname, 'src/reducers'),
       actions: path.resolve(__dirname, 'src/actions'),
-    }
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({
       inject: true,
       hash: true,
       template: './src/index.html',
-      filename: 'index.html'
+      filename: 'index.html',
     }),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-    })
-  ]
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+    }),
+  ],
 }
