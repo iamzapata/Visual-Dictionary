@@ -11,19 +11,25 @@
     "lint": "eslint . --ext .js,.jsx",
     "lint:fix": "eslint . --ext .js,.jsx --fix",
     "start": "webpack-dev-server --mode development --open --hot",
-    "build": "NODE_ENV=production webpack"
+    "build": "NODE_ENV=production webpack",
+    "prettier": "prettier --write 'src/**/*.js' && prettier --write 'src/**/*.jsx'"
   },
   "dependencies": {
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "isomorphic-fetch": "^2.2.1",
+    "keymirror": "^0.1.1",
     "prop-types": "^15.6.1",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "webpack-dotenv-plugin": "^2.0.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "eslint": "^4.19.1",
@@ -31,16 +37,27 @@
     "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.8.2",
+    "fetch-mock": "^6.4.4",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^23.0.1",
+    "prettier": "1.13.5",
     "react-testing-library": "^3.1.3",
+    "redux-logger": "^3.0.6",
+    "redux-mock-store": "^1.5.1",
     "webpack": "^4.10.1",
     "webpack-cli": "^2.1.4",
     "webpack-dev-server": "^3.1.4"
   },
   "jest": {
+    "automock": false,
     "moduleNameMapper": {
-      "^Components(.*)$": "<rootDir>/src/Components$1"
+      "^Components(.*)$": "<rootDir>/src/Components$1",
+      "^utils(.*)$": "<rootDir>/src/utils$1"
+    },
+    "globals": {
+      "API_URL": "",
+      "APP_ID": "",
+      "APP_KEY": ""
     }
   }
 }
