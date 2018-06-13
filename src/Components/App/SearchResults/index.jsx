@@ -1,7 +1,5 @@
-import React from 'react'
+import React from 'react';
 
-const SearchResults = () => (
-  <div className="SearchResults" />
-)
+const SearchResults = () => <div className="SearchResults" />;
 
-export default SearchResults
+export default SearchResults;
