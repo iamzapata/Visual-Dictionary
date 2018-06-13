@@ -1,27 +1,31 @@
-import React from 'react'
-import { render } from 'react-testing-library'
-import App from './index.jsx'
+import React from "react";
+import { render } from "react-testing-library";
+import App from "./index.jsx";
 
-describe('<App />', () => {
+describe("<App />", () => {
+  const store = {
+    subscribe: () => null,
+    dispatch: () => null,
+    getState: () => null
+  };
+  let props = { header: "Visual Dictionary", store };
 
-  let props = { header: 'Visual Dictionary'}
+  it("should render Self: <App />", () => {
+    const { container, queryByText } = render(<App {...props} />);
+    expect(container.firstChild).toMatchSnapshot();
+    const header = queryByText(props.header);
+    expect(header.innerHTML).toBe(props.header);
+  });
 
-  it('renders <App />', () => {
-    const { container, queryByText } = render(<App {...props}/>)
-    expect(container.firstChild).toMatchSnapshot()
-    const header = queryByText(props.header)
-    expect(header.innerHTML).toBe(props.header)
-  })
+  it("should render a <SearchBox /> component", () => {
+    const { container } = render(<App {...props} />);
+    const searchBox = container.querySelectorAll(".SearchBox");
+    expect(searchBox.length).toBe(1);
+  });
 
-  it('renders a <SearchBox /> component', () => {
-    const { container } = render(<App />)
-    const searchBox = container.querySelectorAll('.SearchBox');
-    expect(searchBox.length).toBe(1)
-  })
-
-  it('renders a <SearchResults /> component', () => {
-    const { container } = render(<App />)
-    const results = container.querySelectorAll('.SearchResults')
-    expect(results.length).toBe(1)
-  })
-})
+  it("should render a <SearchResults /> component", () => {
+    const { container } = render(<App {...props} />);
+    const results = container.querySelectorAll(".SearchResults");
+    expect(results.length).toBe(1);
+  });
+});

@@ -1,13 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<App /> renders <App /> 1`] = `
+exports[`<App /> should render Self: <App /> 1`] = `
 <div>
   <h1>
     Visual Dictionary
   </h1>
   <div
     class="SearchBox"
-  />
+  >
+    <form>
+      <input
+        type="text"
+      />
+    </form>
+  </div>
   <div
     class="SearchResults"
   />

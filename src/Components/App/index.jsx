@@ -1,14 +1,25 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import SearchBox from './SearchBox'
-import SearchResults from './SearchResults'
+import React from 'react';
+import PropTypes from 'prop-types';
+import SearchBox from './SearchBox';
+import SearchResults from './SearchResults';
+import { connect } from 'react-redux';
+import searchWord from './SearchBox/actions';
 
-const App = ({ header }) => (
+const App = ({ header, searchWord }) => (
   <div>
     <h1>{header}</h1>
-    <SearchBox />
+    <SearchBox searchWord={searchWord} />
     <SearchResults />
   </div>
-)
+);
 
-export default App
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = {
+  searchWord,
+};
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(App);
