@@ -1,6 +1,7 @@
 const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
+const DotenvPlugin = require('webpack-dotenv-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: { main: './src/index.js' },
@@ -26,6 +27,8 @@ module.exports = {
       Components: path.resolve(__dirname, 'src/Components'),
       reducers: path.resolve(__dirname, 'src/reducers'),
       actions: path.resolve(__dirname, 'src/actions'),
+      actionTypes: path.resolve(__dirname, 'src/actionTypes/'),
+      utils: path.resolve(__dirname, 'src/utils'),
     },
   },
   plugins: [
@@ -35,8 +38,15 @@ module.exports = {
       template: './src/index.html',
       filename: 'index.html',
     }),
+    new DotenvPlugin({
+      sample: './.env.dist',
+      path: './.env',
+    }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      API_URL: JSON.stringify(process.env.API_URL),
+      APP_ID: JSON.stringify(process.env.APP_ID),
+      APP_KEY: JSON.stringify(process.env.APP_KEY),
     }),
   ],
 }
