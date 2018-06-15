@@ -10,20 +10,20 @@ describe("<App />", () => {
   };
   let props = { header: "Visual Dictionary", store };
 
-  it("should render Self: <App />", () => {
+  it("Should render self", () => {
     const { container, queryByText } = render(<App {...props} />);
     expect(container.firstChild).toMatchSnapshot();
     const header = queryByText(props.header);
     expect(header.innerHTML).toBe(props.header);
   });
 
-  it("should render a <SearchBox /> component", () => {
+  it("Should render a <SearchBox /> component", () => {
     const { container } = render(<App {...props} />);
     const searchBox = container.querySelectorAll(".SearchBox");
     expect(searchBox.length).toBe(1);
   });
 
-  it("should render a <SearchResults /> component", () => {
+  it("Should render a <SearchResults /> component", () => {
     const { container } = render(<App {...props} />);
     const results = container.querySelectorAll(".SearchResults");
     expect(results.length).toBe(1);

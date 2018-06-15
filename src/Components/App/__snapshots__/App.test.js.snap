@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<App /> should render Self: <App /> 1`] = `
+exports[`<App /> Should render self 1`] = `
 <div>
   <h1>
     Visual Dictionary
@@ -8,9 +8,14 @@ exports[`<App /> should render Self: <App /> 1`] = `
   <div
     class="SearchBox"
   >
-    <form>
+    <form
+      class="SearchBox__Form"
+    >
       <input
+        class="SearchBox__Input"
+        placeholder="Define ..."
         type="text"
+        value=""
       />
     </form>
   </div>
