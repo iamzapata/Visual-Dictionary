@@ -17,6 +17,9 @@ exports[`<App /> Should render self 1`] = `
         type="text"
         value=""
       />
+      <button>
+        Define
+      </button>
     </form>
   </div>
   <div

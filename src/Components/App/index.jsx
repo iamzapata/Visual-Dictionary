@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import SearchBox from './SearchBox';
-import SearchResults from './SearchResults';
-import { connect } from 'react-redux';
-import searchWord from './SearchBox/actions';
+import React from "react"
+import { func, oneOfType, node, string } from "prop-types"
+import SearchBox from "Components/App/SearchBox"
+import SearchResults from "Components/App/SearchResults"
+import { connect } from "react-redux"
+import searchWord from "./SearchBox/actions"
 
 const App = ({ header, searchWord }) => (
   <div>
@@ -11,15 +11,18 @@ const App = ({ header, searchWord }) => (
     <SearchBox searchWord={searchWord} />
     <SearchResults />
   </div>
-);
+)
 
-const mapStateToProps = state => ({});
+App.propTypes = {
+  searchWord: func.isRequired,
+  header: oneOfType([node, string]).isRequired
+}
 
 const mapDispatchToProps = {
-  searchWord,
-};
+  searchWord
+}
 
 export default connect(
   null,
-  mapDispatchToProps,
-)(App);
+  mapDispatchToProps
+)(App)

@@ -1,5 +1,5 @@
-import SearchBoxReducer from "./SearchBox";
-import ActionTypes from "Components/App/SearchBox/actionTypes";
+import SearchBoxReducer from "./SearchBox"
+import ActionTypes from "Components/App/SearchBox/actionTypes"
 
 describe("SearchBox reducer", () => {
   it("Should return initial state", () => {
@@ -7,23 +7,23 @@ describe("SearchBox reducer", () => {
       isLoading: false,
       err: null,
       results: []
-    });
-  });
+    })
+  })
 
   it("Should handle SEARCH_WORD_REQUEST", () => {
     const requestActionPayload = {
       isLoading: true,
       results: [],
       err: null
-    };
+    }
 
     expect(
       SearchBoxReducer(undefined, {
         type: ActionTypes.SEARCH_WORD_REQUEST,
         ...requestActionPayload
       })
-    ).toEqual({ ...requestActionPayload });
-  });
+    ).toEqual({ ...requestActionPayload })
+  })
 
   it("Should handle SEARCH_WORD_SUCCESS", () => {
     const successActionPayload = {
@@ -37,7 +37,7 @@ describe("SearchBox reducer", () => {
           word: "lion"
         }
       ]
-    };
+    }
 
     expect(
       SearchBoxReducer(
@@ -47,14 +47,14 @@ describe("SearchBox reducer", () => {
           ...successActionPayload
         }
       )
-    ).toEqual({ ...successActionPayload });
-  });
+    ).toEqual({ ...successActionPayload })
+  })
 
   it("Should handle SEARCH_WORD_FAILURE", () => {
     const failureActionPayload = {
       isLoading: false,
       err: new Error()
-    };
+    }
 
     expect(
       SearchBoxReducer(
@@ -64,6 +64,6 @@ describe("SearchBox reducer", () => {
           ...failureActionPayload
         }
       )
-    ).toEqual({ ...failureActionPayload });
-  });
-});
+    ).toEqual({ ...failureActionPayload })
+  })
+})

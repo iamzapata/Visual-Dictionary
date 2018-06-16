@@ -1,8 +1,8 @@
-import { combineReducers } from 'redux';
-import SearchBox from './SearchBox';
+import { combineReducers } from "redux"
+import SearchBox from "./SearchBox"
 
 const rootReducer = combineReducers({
-  SearchBox,
-});
+  SearchBox
+})
 
-export default rootReducer;
+export default rootReducer

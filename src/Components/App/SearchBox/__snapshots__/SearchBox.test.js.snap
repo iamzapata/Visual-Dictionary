@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SearchBox /> Should render self 1`] = `
+<div
+  class="SearchBox"
+>
+  <form
+    class="SearchBox__Form"
+  >
+    <input
+      class="SearchBox__Input"
+      placeholder="Define ..."
+      type="text"
+      value=""
+    />
+    <button>
+      Define
+    </button>
+  </form>
+</div>
+`;
