@@ -3,22 +3,29 @@ import { func } from "prop-types"
 
 class SearchBox extends Component {
   state = {
-    inputValue: ""
+    inputValue: "",
+    showEmptySearchError: false
   }
 
   onSubmitSearch = ev => {
     ev.preventDefault()
     const { inputValue } = this.state
+    if (!inputValue.length) {
+      this.setState({ showEmptySearchError: true })
+      return
+    }
     this.props.searchWord(inputValue)
   }
 
   onInputChange = ev => {
+    ev.stopPropagation()
     const { value: inputValue } = ev.target
-    this.setState({ inputValue })
+    const showEmptySearchError = inputValue.length ? false : true
+    this.setState({ inputValue, showEmptySearchError})
   }
 
   render() {
-    const { inputValue } = this.state
+    const { inputValue, showEmptySearchError } = this.state
     return (
       <div className="SearchBox">
         <form
@@ -32,6 +39,11 @@ class SearchBox extends Component {
             placeholder="Define ..."
             value={inputValue}
           />
+          {showEmptySearchError && (
+            <span className="ErrorMessage">
+              Please type the word you want to search for
+            </span>
+          )}
           <button>Define</button>
         </form>
       </div>
