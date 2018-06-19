@@ -3,7 +3,7 @@ import { func, oneOfType, node, string } from "prop-types"
 import SearchBox from "Components/App/SearchBox"
 import SearchResults from "Components/App/SearchResults"
 import { connect } from "react-redux"
-import searchWord from "./SearchBox/actions"
+import searchWord from "Components/App/SearchBox/actions"
 
 const App = ({ header, searchWord }) => (
   <div>

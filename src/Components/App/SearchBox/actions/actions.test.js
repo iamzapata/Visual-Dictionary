@@ -73,7 +73,6 @@ describe("Async <SearchBar /> action creator", () => {
     ]
 
     return store.dispatch(searchWord(searchQuery)).then(() => {
-      // return of async actions
       expect(store.getActions()).toEqual(expectedActions)
     })
   })

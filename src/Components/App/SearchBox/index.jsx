@@ -20,12 +20,12 @@ class SearchBox extends Component {
   onInputChange = ev => {
     ev.stopPropagation()
     const { value: inputValue } = ev.target
-    if(inputValue.length) {
-      this.setState({inputValue, showEmptySearchError: false})
+    if (inputValue.length) {
+      this.setState({ inputValue, showEmptySearchError: false })
       return
     }
     //const showEmptySearchError = inputValue.length ? false : true
-    this.setState({ inputValue})
+    this.setState({ inputValue })
   }
 
   render() {

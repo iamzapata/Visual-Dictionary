@@ -130,7 +130,9 @@ describe("<SearchBox />", () => {
 
   it("Should not show message when input empty unless form is submitted", () => {
     const props = createProps()
-    const { queryByText, queryByPlaceholderText } = renderIntoDocument(<SearchBox {...props} />)
+    const { queryByText, queryByPlaceholderText } = renderIntoDocument(
+      <SearchBox {...props} />
+    )
     const inputNode = queryByPlaceholderText("Define ...")
 
     inputNode.value = "orangutan"
