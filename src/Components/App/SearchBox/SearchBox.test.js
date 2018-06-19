@@ -1,10 +1,5 @@
 import React from "react"
-import {
-  render,
-  renderIntoDocument,
-  cleanup,
-  fireEvent
-} from "react-testing-library"
+import { renderIntoDocument, cleanup, fireEvent } from "react-testing-library"
 import SearchBox from "./index.jsx"
 
 describe("<SearchBox />", () => {
@@ -17,31 +12,36 @@ describe("<SearchBox />", () => {
   const emptyInputErrorMessage = "Please type the word you want to search for"
 
   it("Should render self", () => {
-    const { container } = render(<SearchBox {...createProps()} />)
+    const { container } = renderIntoDocument(<SearchBox {...createProps()} />)
     expect(container.firstChild).toMatchSnapshot()
   })
 
   it("Should have a SearchBox className", () => {
-    const { container } = render(<SearchBox {...createProps()} />)
+    const { container } = renderIntoDocument(<SearchBox {...createProps()} />)
     const className = container.querySelectorAll(".SearchBox")
     expect(className.length).toEqual(1)
   })
 
   it("Should have a form element", () => {
-    const { container } = render(<SearchBox {...createProps()} />)
+    const { container } = renderIntoDocument(<SearchBox {...createProps()} />)
     const form = container.firstChild.querySelector("form")
+
     expect(form).toBeTruthy()
   })
 
   it("Should have an input element", () => {
-    const { queryByPlaceholderText } = render(<SearchBox {...createProps()} />)
+    const { queryByPlaceholderText } = renderIntoDocument(
+      <SearchBox {...createProps()} />
+    )
     const input = queryByPlaceholderText("Define ...")
+
     expect(input).toBeTruthy()
   })
 
   it("Should have a submit button", () => {
-    const { queryByText } = render(<SearchBox {...createProps()} />)
+    const { queryByText } = renderIntoDocument(<SearchBox {...createProps()} />)
     const submitButton = queryByText("Define")
+
     expect(submitButton).toBeTruthy()
   })
 
@@ -51,8 +51,10 @@ describe("<SearchBox />", () => {
       <SearchBox {...createProps()} />
     )
     const inputNode = queryByPlaceholderText("Define ...")
+
     inputNode.value = searchString
     fireEvent.change(inputNode)
+
     expect(queryByPlaceholderText("Define ...").value).toEqual(searchString)
   })
 
@@ -62,9 +64,11 @@ describe("<SearchBox />", () => {
       <SearchBox {...props} />
     )
     const input = queryByPlaceholderText("Define ...")
+
     input.value = "zebra"
     fireEvent.change(input)
     fireEvent.submit(input)
+
     expect(props.searchWord).toHaveBeenCalledTimes(1)
   })
 
@@ -75,9 +79,11 @@ describe("<SearchBox />", () => {
     )
     const button = queryByText("Define")
     const input = queryByPlaceholderText("Define ...")
+
     input.value = "flamingo"
     fireEvent.change(input)
     fireEvent.submit(button)
+
     expect(props.searchWord).toHaveBeenCalledTimes(1)
   })
 
@@ -90,9 +96,11 @@ describe("<SearchBox />", () => {
     } = renderIntoDocument(<SearchBox {...props} />)
     const form = container.firstChild.querySelector("form")
     const inputNode = queryByPlaceholderText("Define ...")
+
     inputNode.value = ""
     fireEvent.change(inputNode)
     fireEvent.submit(form)
+
     expect(props.searchWord).not.toHaveBeenCalled()
     expect(queryByText(emptyInputErrorMessage)).not.toBeNull()
   })
@@ -106,13 +114,30 @@ describe("<SearchBox />", () => {
     } = renderIntoDocument(<SearchBox {...props} />)
     const form = container.firstChild.querySelector("form")
     const inputNode = queryByPlaceholderText("Define ...")
-    inputNode.change = ""
+
+    inputNode.value = ""
     fireEvent.change(inputNode)
     fireEvent.submit(form)
+
     expect(props.searchWord).not.toHaveBeenCalled()
     expect(queryByText(emptyInputErrorMessage)).not.toBeNull()
+
     inputNode.value = "elephant"
     fireEvent.change(inputNode)
+
+    expect(queryByText(emptyInputErrorMessage)).toBeNull()
+  })
+
+  it("Should not show message when input empty unless form is submitted", () => {
+    const props = createProps()
+    const { queryByText, queryByPlaceholderText } = renderIntoDocument(<SearchBox {...props} />)
+    const inputNode = queryByPlaceholderText("Define ...")
+
+    inputNode.value = "orangutan"
+    fireEvent.change(inputNode)
+    inputNode.value = ""
+    fireEvent.change(inputNode)
+
     expect(queryByText(emptyInputErrorMessage)).toBeNull()
   })
 })
