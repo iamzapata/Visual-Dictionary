@@ -25,6 +25,24 @@ describe("SearchBox reducer", () => {
     ).toEqual({ ...requestActionPayload })
   })
 
+  it("Should clear error when SEARCH_WORD_REQUEST is dispatched", () => {
+    const requestActonPayload = {
+      isLoading: true,
+      results: [],
+      err: null
+    }
+
+    expect(
+      SearchBoxReducer(
+        { isLoading: true, err: { message: "NOT FOUND" }, results: [] },
+        {
+          type: ActionTypes.SEARCH_WORD_REQUEST,
+          ...requestActonPayload
+        }
+      )
+    ).toEqual(requestActonPayload)
+  })
+
   it("Should handle SEARCH_WORD_SUCCESS", () => {
     const successActionPayload = {
       isLoading: false,

@@ -12,7 +12,8 @@ export default function searchWord(state = defaultState, action) {
     case ActionTypes.SEARCH_WORD_REQUEST:
       return {
         ...state,
-        isLoading
+        isLoading,
+        err
       }
     case ActionTypes.SEARCH_WORD_SUCCESS:
       return {
@@ -27,6 +28,6 @@ export default function searchWord(state = defaultState, action) {
         err
       }
     default:
-      return state
+      return { ...state }
   }
 }
