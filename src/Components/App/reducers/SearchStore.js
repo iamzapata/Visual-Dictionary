@@ -6,7 +6,7 @@ const defaultState = {
   results: []
 }
 
-export default function SearchBox(state = defaultState, action) {
+export default function SearchStore(state = defaultState, action) {
   const { type, isLoading, err, results } = action
   switch (type) {
     case ActionTypes.SEARCH_WORD_REQUEST:

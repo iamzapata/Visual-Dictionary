@@ -7,7 +7,7 @@ describe("<SearchBox />", () => {
 
   const createProps = () => ({
     searchWord: jest.fn(),
-    SearchBoxStore: {}
+    SearchStore: {}
   })
 
   const emptyInputErrorMessage = "Please type the word you want to search for"
@@ -149,7 +149,7 @@ describe("<SearchBox />", () => {
   it("Should display a message when there are no results", () => {
     const props = {
       ...createProps(),
-      SearchBoxStore: { err: { message: "NOT FOUND" } }
+      SearchStore: { err: { message: "NOT FOUND" } }
     }
 
     const {
@@ -170,7 +170,7 @@ describe("<SearchBox />", () => {
   it("Should not show no results message unless form is submitted", () => {
     const props = {
       ...createProps(),
-      SearchBoxStore: { err: { message: "NOT FOUND" } }
+      SearchStore: { err: { message: "NOT FOUND" } }
     }
 
     const {
@@ -187,7 +187,7 @@ describe("<SearchBox />", () => {
 
     const newProps = {
       ...props,
-      SearchBoxStore: { err: null }
+      SearchStore: { err: null }
     }
 
     rerender(<SearchBox {...newProps} />)

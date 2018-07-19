@@ -30,7 +30,7 @@ class SearchBox extends Component {
 
   render() {
     const {
-      SearchBoxStore: { err }
+      SearchStore: { err }
     } = this.props
     const { inputValue, showEmptySearchError } = this.state
     return (
@@ -63,7 +63,7 @@ class SearchBox extends Component {
 
 SearchBox.propTypes = {
   searchWord: func.isRequired,
-  SearchBoxStore: shape({
+  SearchStore: shape({
     err: shape({ message: string }),
     isLoading: boolean,
     results: arrayOf(shape({ shape }))

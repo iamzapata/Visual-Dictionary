@@ -1,4 +1,4 @@
-import SearchBoxReducer from "./SearchBox"
+import SearchBoxReducer from "./SearchStore"
 import ActionTypes from "Components/App/actionTypes/index"
 
 describe("SearchBox reducer", () => {

@@ -13,18 +13,18 @@ import SearchResults from "Components/App/SearchResults"
 import { connect } from "react-redux"
 import searchWord from "Components/App/actions"
 
-export const App = ({ header, searchWord, SearchBoxStore }) => (
+export const App = ({ header, searchWord, SearchStore }) => (
   <div>
     <h1>{header}</h1>
-    <SearchBox searchWord={searchWord} SearchBoxStore={SearchBoxStore} />
-    <SearchResults />
+    <SearchBox searchWord={searchWord} SearchStore={SearchStore} />
+    <SearchResults results={SearchStore.results} />
   </div>
 )
 
 App.propTypes = {
   searchWord: func.isRequired,
   header: oneOfType([node, string]).isRequired,
-  SearchBoxStore: shape({
+  SearchStore: shape({
     isLoading: boolean,
     results: arrayOf(shape({ shape }))
   }).isRequired
@@ -35,7 +35,7 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = state => ({
-  SearchBoxStore: state.SearchBox
+  SearchStore: state.SearchStore
 })
 
 export default connect(
