@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SearchResults /> Should render self 1`] = `
+<div
+  class="SearchResults"
+>
+  <ul />
+</div>
+`;

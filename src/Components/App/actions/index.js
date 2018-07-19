@@ -1,5 +1,5 @@
-import ActionTypes from "Components/App/SearchBox/actionTypes"
-import request from "utils/request"
+import ActionTypes from "Components/App/actionTypes/index"
+import request from "utils/request/index"
 
 export const searchWordRequest = searchQuery => ({
   type: ActionTypes.SEARCH_WORD_REQUEST,

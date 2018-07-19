@@ -1,5 +1,5 @@
 import SearchBoxReducer from "./SearchBox"
-import ActionTypes from "Components/App/SearchBox/actionTypes"
+import ActionTypes from "Components/App/actionTypes/index"
 
 describe("SearchBox reducer", () => {
   it("Should return initial state", () => {

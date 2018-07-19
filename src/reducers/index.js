@@ -1,3 +1,3 @@
-import SearchBox from "Components/App/SearchBox/reducers"
+import SearchBox from "Components/App/reducers"
 
 export default SearchBox

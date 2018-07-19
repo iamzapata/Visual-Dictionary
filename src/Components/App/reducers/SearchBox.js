@@ -1,4 +1,4 @@
-import ActionTypes from "Components/App/SearchBox/actionTypes"
+import ActionTypes from "Components/App/actionTypes/index"
 
 const defaultState = {
   isLoading: false,
@@ -6,7 +6,7 @@ const defaultState = {
   results: []
 }
 
-export default function searchWord(state = defaultState, action) {
+export default function SearchBox(state = defaultState, action) {
   const { type, isLoading, err, results } = action
   switch (type) {
     case ActionTypes.SEARCH_WORD_REQUEST:
@@ -28,6 +28,6 @@ export default function searchWord(state = defaultState, action) {
         err
       }
     default:
-      return { ...state }
+      return state
   }
 }

@@ -24,6 +24,8 @@ exports[`<App /> Should render self 1`] = `
   </div>
   <div
     class="SearchResults"
-  />
+  >
+    <ul />
+  </div>
 </div>
 `;

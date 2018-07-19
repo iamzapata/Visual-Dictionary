@@ -11,7 +11,7 @@ import {
 import SearchBox from "Components/App/SearchBox"
 import SearchResults from "Components/App/SearchResults"
 import { connect } from "react-redux"
-import searchWord from "Components/App/SearchBox/actions"
+import searchWord from "Components/App/actions"
 
 export const App = ({ header, searchWord, SearchBoxStore }) => (
   <div>

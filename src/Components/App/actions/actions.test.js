@@ -1,6 +1,6 @@
 import * as actions from "./index"
 import searchWord from "./index"
-import ActionTypes from "Components/App/SearchBox/actionTypes"
+import ActionTypes from "Components/App/actionTypes/index"
 import configureMockStore from "redux-mock-store"
 import thunk from "redux-thunk"
 import fetchMock from "fetch-mock"
