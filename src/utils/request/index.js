@@ -1,5 +1,12 @@
 import "isomorphic-fetch"
 
+const checkStatus = response => {
+  if (response.ok) {
+    return response
+  }
+  throw Error(response.statusText)
+}
+
 function request(url, options = {}, api = API_URL) {
   const requestUrl = `${api}/${url}`
 
@@ -19,7 +26,9 @@ function request(url, options = {}, api = API_URL) {
     ...options.headers
   }
 
-  return fetch(requestUrl, options).then(response => response.json())
+  return fetch(requestUrl, options)
+    .then(checkStatus)
+    .then(response => response.json())
 }
 
 export default request
