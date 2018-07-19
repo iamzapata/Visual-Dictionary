@@ -6,20 +6,23 @@ describe("<SearchBox />", () => {
   afterEach(cleanup)
 
   const createProps = () => ({
-    searchWord: jest.fn()
+    searchWord: jest.fn(),
+    SearchBoxStore: {}
   })
 
   const emptyInputErrorMessage = "Please type the word you want to search for"
+  const noResultsErrorMessage = "No results for your search"
 
   it("Should render self", () => {
     const { container } = renderIntoDocument(<SearchBox {...createProps()} />)
+    expect(container.firstChild).toBeTruthy()
     expect(container.firstChild).toMatchSnapshot()
   })
 
   it("Should have a SearchBox className", () => {
     const { container } = renderIntoDocument(<SearchBox {...createProps()} />)
-    const className = container.querySelectorAll(".SearchBox")
-    expect(className.length).toEqual(1)
+    const classNameSelection = container.querySelectorAll(".SearchBox")
+    expect(classNameSelection.length).toEqual(1)
   })
 
   it("Should have a form element", () => {
@@ -128,7 +131,7 @@ describe("<SearchBox />", () => {
     expect(queryByText(emptyInputErrorMessage)).toBeNull()
   })
 
-  it("Should not show message when input empty unless form is submitted", () => {
+  it("Should not show empty input message when input empty unless form is submitted", () => {
     const props = createProps()
     const { queryByText, queryByPlaceholderText } = renderIntoDocument(
       <SearchBox {...props} />
@@ -141,5 +144,54 @@ describe("<SearchBox />", () => {
     fireEvent.change(inputNode)
 
     expect(queryByText(emptyInputErrorMessage)).toBeNull()
+  })
+
+  it("Should display a message when there are no results", () => {
+    const props = {
+      ...createProps(),
+      SearchBoxStore: { err: { message: "NOT FOUND" } }
+    }
+
+    const {
+      container,
+      queryByText,
+      queryByPlaceholderText
+    } = renderIntoDocument(<SearchBox {...props} />)
+    const form = container.firstChild.querySelector("form")
+    const inputNode = queryByPlaceholderText("Define ...")
+
+    inputNode.value = "nopenope"
+    fireEvent.change(inputNode)
+    fireEvent.submit(form)
+
+    expect(queryByText(noResultsErrorMessage)).not.toBeNull()
+  })
+
+  it("Should not show no results message unless form is submitted", () => {
+    const props = {
+      ...createProps(),
+      SearchBoxStore: { err: { message: "NOT FOUND" } }
+    }
+
+    const {
+      rerender,
+      queryByPlaceholderText,
+      queryByText
+    } = renderIntoDocument(<SearchBox {...props} />)
+    const inputNode = queryByPlaceholderText("Define ...")
+
+    inputNode.value = "nopenope"
+    fireEvent.change(inputNode)
+    inputNode.value = ""
+    fireEvent.change(inputNode)
+
+    const newProps = {
+      ...props,
+      SearchBoxStore: { err: null }
+    }
+
+    rerender(<SearchBox {...newProps} />)
+
+    expect(queryByText(noResultsErrorMessage)).toBeNull()
   })
 })

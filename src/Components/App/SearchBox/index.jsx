@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { func } from "prop-types"
+import { arrayOf, boolean, func, shape, string } from "prop-types"
 
 class SearchBox extends Component {
   state = {
@@ -24,11 +24,14 @@ class SearchBox extends Component {
       this.setState({ inputValue, showEmptySearchError: false })
       return
     }
-    //const showEmptySearchError = inputValue.length ? false : true
+
     this.setState({ inputValue })
   }
 
   render() {
+    const {
+      SearchBoxStore: { err }
+    } = this.props
     const { inputValue, showEmptySearchError } = this.state
     return (
       <div className="SearchBox">
@@ -48,6 +51,9 @@ class SearchBox extends Component {
               Please type the word you want to search for
             </span>
           )}
+          {err && (
+            <span className="ErrorMessage">No results for your search</span>
+          )}
           <button>Define</button>
         </form>
       </div>
@@ -56,7 +62,12 @@ class SearchBox extends Component {
 }
 
 SearchBox.propTypes = {
-  searchWord: func.isRequired
+  searchWord: func.isRequired,
+  SearchBoxStore: shape({
+    err: shape({ message: string }),
+    isLoading: boolean,
+    results: arrayOf(shape({ shape }))
+  }).isRequired
 }
 
 export default SearchBox
