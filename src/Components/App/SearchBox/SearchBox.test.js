@@ -152,17 +152,7 @@ describe("<SearchBox />", () => {
       SearchStore: { err: { message: "NOT FOUND" } }
     }
 
-    const {
-      container,
-      queryByText,
-      queryByPlaceholderText
-    } = renderIntoDocument(<SearchBox {...props} />)
-    const form = container.firstChild.querySelector("form")
-    const inputNode = queryByPlaceholderText("Define ...")
-
-    inputNode.value = "nopenope"
-    fireEvent.change(inputNode)
-    fireEvent.submit(form)
+    const { queryByText } = renderIntoDocument(<SearchBox {...props} />)
 
     expect(queryByText(noResultsErrorMessage)).not.toBeNull()
   })
@@ -173,17 +163,9 @@ describe("<SearchBox />", () => {
       SearchStore: { err: { message: "NOT FOUND" } }
     }
 
-    const {
-      rerender,
-      queryByPlaceholderText,
-      queryByText
-    } = renderIntoDocument(<SearchBox {...props} />)
-    const inputNode = queryByPlaceholderText("Define ...")
-
-    inputNode.value = "nopenope"
-    fireEvent.change(inputNode)
-    inputNode.value = ""
-    fireEvent.change(inputNode)
+    const { rerender, queryByText } = renderIntoDocument(
+      <SearchBox {...props} />
+    )
 
     const newProps = {
       ...props,
@@ -192,6 +174,28 @@ describe("<SearchBox />", () => {
 
     rerender(<SearchBox {...newProps} />)
 
+    expect(queryByText(noResultsErrorMessage)).toBeNull()
+  })
+
+  it("It should not display no results error if empty search error is visible", () => {
+    const props = {
+      ...createProps(),
+      SearchStore: { err: { message: "NOT FOUND" } }
+    }
+
+    const {
+      container,
+      queryByText,
+      queryByPlaceholderText
+    } = renderIntoDocument(<SearchBox {...props} />)
+    const form = container.firstChild.querySelector("form")
+    const inputNode = queryByPlaceholderText("Define ...")
+
+    inputNode.value = ""
+    fireEvent.change(inputNode)
+    fireEvent.submit(form)
+
+    expect(queryByText(emptyInputErrorMessage)).not.toBeNull()
     expect(queryByText(noResultsErrorMessage)).toBeNull()
   })
 })

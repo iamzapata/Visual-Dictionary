@@ -4,7 +4,18 @@ import { arrayOf, boolean, func, shape, string } from "prop-types"
 class SearchBox extends Component {
   state = {
     inputValue: "",
-    showEmptySearchError: false
+    showEmptySearchError: false,
+    showNoResultsError: false
+  }
+
+  static getDerivedStateFromProps(nextProps) {
+    const {
+      SearchStore: { err }
+    } = nextProps
+    if (err) {
+      return { showNoResultsError: true }
+    }
+    return { showNoResultsError: false }
   }
 
   onSubmitSearch = ev => {
@@ -29,10 +40,7 @@ class SearchBox extends Component {
   }
 
   render() {
-    const {
-      SearchStore: { err }
-    } = this.props
-    const { inputValue, showEmptySearchError } = this.state
+    const { inputValue, showEmptySearchError, showNoResultsError } = this.state
     return (
       <div className="SearchBox">
         <form
@@ -51,9 +59,10 @@ class SearchBox extends Component {
               Please type the word you want to search for
             </span>
           )}
-          {err && (
-            <span className="ErrorMessage">No results for your search</span>
-          )}
+          {showNoResultsError &&
+            !showEmptySearchError && (
+              <span className="ErrorMessage">No results for your search</span>
+            )}
           <button>Define</button>
         </form>
       </div>
