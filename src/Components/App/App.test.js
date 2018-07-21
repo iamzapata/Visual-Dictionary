@@ -6,7 +6,8 @@ describe("<App />", () => {
   const createProps = () => ({
     searchWord: jest.fn(),
     SearchStore: { results: [] },
-    header: "Visual Dictionary"
+    header: "Visual Dictionary",
+    lexicalEntries: []
   })
 
   it("Should render self", () => {
