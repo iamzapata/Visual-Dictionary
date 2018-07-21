@@ -12,12 +12,13 @@ import SearchBox from "Components/App/SearchBox"
 import SearchResults from "Components/App/SearchResults"
 import { connect } from "react-redux"
 import searchWord from "Components/App/actions"
+import lexicalEntriesSelector from "Components/App/reducers/selectors"
 
-export const App = ({ header, searchWord, SearchStore }) => (
+export const App = ({ header, searchWord, SearchStore, lexicalEntries }) => (
   <div>
     <h1>{header}</h1>
     <SearchBox searchWord={searchWord} SearchStore={SearchStore} />
-    <SearchResults results={SearchStore.results} />
+    <SearchResults results={lexicalEntries} />
   </div>
 )
 
@@ -27,7 +28,8 @@ App.propTypes = {
   SearchStore: shape({
     isLoading: boolean,
     results: arrayOf(shape({ shape }))
-  }).isRequired
+  }).isRequired,
+  lexicalEntries: arrayOf(shape({})).isRequired
 }
 
 const mapDispatchToProps = {
@@ -35,7 +37,8 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = state => ({
-  SearchStore: state.SearchStore
+  SearchStore: state.SearchStore,
+  lexicalEntries: lexicalEntriesSelector(state)
 })
 
 export default connect(
