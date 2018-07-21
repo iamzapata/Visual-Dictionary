@@ -1,4 +1,4 @@
-import { lexicalEntriesSelector } from "Components/App/reducers/selectors"
+import lexicalEntriesSelector from "Components/App/reducers/selectors"
 import { type } from "ramda"
 
 const mockState = {
