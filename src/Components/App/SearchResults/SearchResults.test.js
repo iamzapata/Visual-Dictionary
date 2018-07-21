@@ -1,12 +1,13 @@
 import React from "react"
 import SearchResults from "./index.jsx"
 import { renderIntoDocument, cleanup } from "react-testing-library"
+import entrySample from "./mocks"
 
 describe("<SearchResults />", () => {
   afterEach(cleanup)
 
   const createProps = () => ({
-    results: []
+    results: [...entrySample]
   })
 
   it("Should render self", () => {
@@ -38,17 +39,7 @@ describe("<SearchResults />", () => {
   })
 
   it("Should display a list of search results", () => {
-    const results = [
-      {
-        result: "a"
-      },
-      {
-        result: "b"
-      },
-      {
-        result: "c"
-      }
-    ]
+    const results = [{ ...entrySample }, { ...entrySample }, { ...entrySample }]
 
     const { container } = renderIntoDocument(
       <SearchResults results={results} />
