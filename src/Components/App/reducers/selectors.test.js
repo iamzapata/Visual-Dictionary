@@ -6,8 +6,8 @@ const mockState = {
     results: [
       {
         lexicalEntries: [
-          { lexicalCategory: "Noun", entries: [] },
-          { lexicalCategory: "Verb", entries: [] }
+          { lexicalCategory: "Noun", entries: [], pronunciations: [] },
+          { lexicalCategory: "Verb", entries: [], pronunciations: [] }
         ]
       }
     ]
