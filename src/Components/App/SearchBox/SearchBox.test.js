@@ -1,5 +1,5 @@
 import React from "react"
-import { renderIntoDocument, cleanup, fireEvent } from "react-testing-library"
+import { render, cleanup, fireEvent } from "react-testing-library"
 import SearchBox from "./index.jsx"
 
 describe("<SearchBox />", () => {
@@ -14,35 +14,33 @@ describe("<SearchBox />", () => {
   const noResultsErrorMessage = "No results for your search"
 
   it("Should render self", () => {
-    const { container } = renderIntoDocument(<SearchBox {...createProps()} />)
+    const { container } = render(<SearchBox {...createProps()} />)
     expect(container.firstChild).toBeTruthy()
     expect(container.firstChild).toMatchSnapshot()
   })
 
   it("Should have a SearchBox className", () => {
-    const { container } = renderIntoDocument(<SearchBox {...createProps()} />)
+    const { container } = render(<SearchBox {...createProps()} />)
     const classNameSelection = container.querySelectorAll(".SearchBox")
     expect(classNameSelection.length).toEqual(1)
   })
 
   it("Should have a form element", () => {
-    const { container } = renderIntoDocument(<SearchBox {...createProps()} />)
+    const { container } = render(<SearchBox {...createProps()} />)
     const form = container.firstChild.querySelector("form")
 
     expect(form).toBeTruthy()
   })
 
   it("Should have an input element", () => {
-    const { queryByPlaceholderText } = renderIntoDocument(
-      <SearchBox {...createProps()} />
-    )
+    const { queryByPlaceholderText } = render(<SearchBox {...createProps()} />)
     const input = queryByPlaceholderText("Define ...")
 
     expect(input).toBeTruthy()
   })
 
   it("Should have a submit button", () => {
-    const { queryByText } = renderIntoDocument(<SearchBox {...createProps()} />)
+    const { queryByText } = render(<SearchBox {...createProps()} />)
     const submitButton = queryByText("Define")
 
     expect(submitButton).toBeTruthy()
@@ -50,9 +48,7 @@ describe("<SearchBox />", () => {
 
   it("Should allow the user to type a word to search for", () => {
     const searchString = "lion"
-    const { queryByPlaceholderText } = renderIntoDocument(
-      <SearchBox {...createProps()} />
-    )
+    const { queryByPlaceholderText } = render(<SearchBox {...createProps()} />)
     const inputNode = queryByPlaceholderText("Define ...")
 
     inputNode.value = searchString
@@ -63,9 +59,7 @@ describe("<SearchBox />", () => {
 
   it("Should allow the user to submit search by pressing enter key", () => {
     const props = createProps()
-    const { queryByPlaceholderText } = renderIntoDocument(
-      <SearchBox {...props} />
-    )
+    const { queryByPlaceholderText } = render(<SearchBox {...props} />)
     const input = queryByPlaceholderText("Define ...")
 
     input.value = "zebra"
@@ -77,7 +71,7 @@ describe("<SearchBox />", () => {
 
   it("Should allow the user to submit search by clicking define button", () => {
     const props = createProps()
-    const { queryByText, queryByPlaceholderText } = renderIntoDocument(
+    const { queryByText, queryByPlaceholderText } = render(
       <SearchBox {...props} />
     )
     const button = queryByText("Define")
@@ -92,11 +86,9 @@ describe("<SearchBox />", () => {
 
   it("Should not allow to search empty strings", () => {
     const props = createProps()
-    const {
-      container,
-      queryByText,
-      queryByPlaceholderText
-    } = renderIntoDocument(<SearchBox {...props} />)
+    const { container, queryByText, queryByPlaceholderText } = render(
+      <SearchBox {...props} />
+    )
     const form = container.firstChild.querySelector("form")
     const inputNode = queryByPlaceholderText("Define ...")
 
@@ -110,11 +102,9 @@ describe("<SearchBox />", () => {
 
   it("Should clear error message on input change", () => {
     const props = createProps()
-    const {
-      container,
-      queryByText,
-      queryByPlaceholderText
-    } = renderIntoDocument(<SearchBox {...props} />)
+    const { container, queryByText, queryByPlaceholderText } = render(
+      <SearchBox {...props} />
+    )
     const form = container.firstChild.querySelector("form")
     const inputNode = queryByPlaceholderText("Define ...")
 
@@ -133,7 +123,7 @@ describe("<SearchBox />", () => {
 
   it("Should not show empty input message when input empty unless form is submitted", () => {
     const props = createProps()
-    const { queryByText, queryByPlaceholderText } = renderIntoDocument(
+    const { queryByText, queryByPlaceholderText } = render(
       <SearchBox {...props} />
     )
     const inputNode = queryByPlaceholderText("Define ...")
@@ -152,7 +142,7 @@ describe("<SearchBox />", () => {
       SearchStore: { err: { message: "NOT FOUND" } }
     }
 
-    const { queryByText } = renderIntoDocument(<SearchBox {...props} />)
+    const { queryByText } = render(<SearchBox {...props} />)
 
     expect(queryByText(noResultsErrorMessage)).not.toBeNull()
   })
@@ -163,9 +153,7 @@ describe("<SearchBox />", () => {
       SearchStore: { err: { message: "NOT FOUND" } }
     }
 
-    const { rerender, queryByText } = renderIntoDocument(
-      <SearchBox {...props} />
-    )
+    const { rerender, queryByText } = render(<SearchBox {...props} />)
 
     const newProps = {
       ...props,
@@ -183,11 +171,9 @@ describe("<SearchBox />", () => {
       SearchStore: { err: { message: "NOT FOUND" } }
     }
 
-    const {
-      container,
-      queryByText,
-      queryByPlaceholderText
-    } = renderIntoDocument(<SearchBox {...props} />)
+    const { container, queryByText, queryByPlaceholderText } = render(
+      <SearchBox {...props} />
+    )
     const form = container.firstChild.querySelector("form")
     const inputNode = queryByPlaceholderText("Define ...")
 
