@@ -13,7 +13,10 @@
   "globals": {
     "API_URL": true,
     "APP_ID": true,
-    "APP_KEY": true
+    "APP_KEY": true,
+    "GOOGLE_SEARCH_KEY": true,
+    "GOOGLE_SEARCH_ENGINE": true
+
   },
   "rules": {
     "semi": 0,
