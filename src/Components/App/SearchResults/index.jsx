@@ -1,11 +1,10 @@
 import React from "react"
 import { arrayOf, shape } from "prop-types"
-import shortId from "shortid"
 import LexicalEntry from "./Components/LexicalEntry"
 
 const renderResultItem = entry => {
   return (
-    <li key={shortId.generate()}>
+    <li key={entry.id}>
       <LexicalEntry entry={entry} />
     </li>
   )
