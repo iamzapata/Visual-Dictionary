@@ -8,13 +8,15 @@ export const searchWordRequest = searchQuery => ({
   searchQuery
 })
 
-export function searchWordSuccess(response) {
+export function searchWordSuccess(response, relatedImages) {
   const { results } = response
+  const { items: imageResults } = relatedImages
   return {
     type: ActionTypes.SEARCH_WORD_SUCCESS,
     err: null,
     isLoading: false,
-    results
+    results,
+    imageResults
   }
 }
 
@@ -27,14 +29,25 @@ export function searchWordFailure(err) {
 }
 
 export default function searchWord(queryString) {
-  return dispatch => {
+  return async dispatch => {
     dispatch(searchWordRequest(queryString))
-    return request(`entries/en/${queryString}`)
-      .then(response => {
-        dispatch(searchWordSuccess(response))
-      })
-      .catch(err => {
-        dispatch(searchWordFailure(err))
-      })
+    try {
+      const entries = await request(`entries/en/${queryString}`)
+      const relatedImages = await searchImages(queryString)
+      dispatch(searchWordSuccess(entries, relatedImages))
+    } catch (err) {
+      dispatch(searchWordFailure(err))
+    }
   }
+}
+
+function searchImages(queryString) {
+  return request(
+    `v1?key=${GOOGLE_SEARCH_KEY}&cx=${GOOGLE_SEARCH_ENGINE}&searchType=image&q=${queryString}`,
+    {
+      "Content-Type": "application/x-www-form-urlencoded",
+      Accept: "application/json"
+    },
+    "https://www.googleapis.com/customsearch"
+  )
 }

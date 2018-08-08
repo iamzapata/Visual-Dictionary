@@ -19,14 +19,26 @@ describe("<SearchBar /> action creators", () => {
 
   it("should create an action to dispatch request success", () => {
     const response = { medatdata: {}, results: [] }
+    const imageSearchResponse = {
+      context: {},
+      items: [],
+      kind: "",
+      queries: {},
+      searchInformation: {},
+      url: {}
+    }
     const { results } = response
+    const imageResults = imageSearchResponse.items
     const expectedAction = {
       type: ActionTypes.SEARCH_WORD_SUCCESS,
       err: null,
       isLoading: false,
-      results
+      results,
+      imageResults
     }
-    expect(actions.searchWordSuccess(response)).toEqual(expectedAction)
+    expect(actions.searchWordSuccess(response, imageSearchResponse)).toEqual(
+      expectedAction
+    )
   })
 
   it("should create an action to dispatch request failure", () => {
@@ -52,10 +64,23 @@ describe("Async <SearchBar /> action creator", () => {
   const searchQuery = "lion"
 
   it("Should dispatch SEARCH_WORD_REQUEST and SEARCH_WORD_SUCCESS when entry fetch is done", () => {
-    const response = { medatdata: {}, results: [] }
-    const { results } = response
+    const entriesResponse = { medatdata: {}, results: [] }
+    const imageSearchResponse = {
+      context: {},
+      items: [],
+      kind: "",
+      queries: {},
+      searchInformation: {},
+      url: {}
+    }
+    const { results } = entriesResponse
+    const imageResults = imageSearchResponse.items
     const store = mockStore({})
-    fetchMock.getOnce(`${API_URL}/entries/en/lion`, response)
+    fetchMock.getOnce(`${API_URL}/entries/en/lion`, entriesResponse)
+    fetchMock.getOnce(
+      `https://www.googleapis.com/customsearch/v1?key=&cx=&searchType=image&q=lion`,
+      imageSearchResponse
+    )
 
     const expectedActions = [
       {
@@ -68,7 +93,8 @@ describe("Async <SearchBar /> action creator", () => {
         type: ActionTypes.SEARCH_WORD_SUCCESS,
         err: null,
         isLoading: false,
-        results
+        results,
+        imageResults
       }
     ]
 
