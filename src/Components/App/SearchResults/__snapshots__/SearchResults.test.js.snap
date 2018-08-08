@@ -4,6 +4,44 @@ exports[`<SearchResults /> Should render self 1`] = `
 <div
   class="SearchResults"
 >
-  <ul />
+  <ul>
+    <li>
+      <div
+        class="LexicalEntry"
+      >
+        <h4>
+          privacy
+        </h4>
+        <h5>
+          Noun
+        </h5>
+        <div>
+          <span>
+            <span>
+              prɪvəsi
+            </span>
+            <span>
+              <span>
+                British English
+              </span>
+              <button>
+                ►
+              </button>
+            </span>
+          </span>
+          <span>
+            <span>
+              prʌɪvəsi
+            </span>
+            <span>
+              <span>
+                British English
+              </span>
+            </span>
+          </span>
+        </div>
+      </div>
+    </li>
+  </ul>
 </div>
 `;
