@@ -1,15 +1,15 @@
 import React from "react"
 import { arrayOf, shape, string } from "prop-types"
-import shortId from "shortid"
+import PlayAudioButton from "../PlayAudioButton"
 
 const renderPronunciations = pronunciations => (
   <div>
     {pronunciations.map(p => (
-      <span key={shortId.generate()}>
+      <span key={p.id}>
         <span>{p.phoneticSpelling}</span>
         <span>
-          {p.dialects.map(d => <span key={shortId.generate()}>{d}</span>)}
-          {p.audioFile && <button>&#9658;</button>}
+          {p.dialects.map(d => <span key={d}>{d}</span>)}
+          {p.audioFile && <PlayAudioButton audioFile={p.audioFile} />}
         </span>
       </span>
     ))}
