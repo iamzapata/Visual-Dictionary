@@ -7,7 +7,8 @@ describe("<App />", () => {
     searchWord: jest.fn(),
     SearchStore: { results: [] },
     header: "Visual Dictionary",
-    lexicalEntries: []
+    lexicalEntries: [],
+    isLoading: false
   })
 
   it("Should render self", () => {
@@ -30,5 +31,17 @@ describe("<App />", () => {
     const results = container.querySelectorAll(".SearchResults")
 
     expect(results.length).toBe(1)
+  })
+
+  it("Should display a loading indicator if requests is active", () => {
+    const props = {
+      ...createProps(),
+      isLoading: true
+    }
+    const { container } = render(<App {...props} />)
+
+    const loadingSpinner = container.querySelector(".LoadingSpinner")
+
+    expect(loadingSpinner).toBeTruthy()
   })
 })
