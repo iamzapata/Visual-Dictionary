@@ -1,25 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<App /> Should render self 1`] = `
-<div>
-  <h1>
+<div
+  class="App"
+>
+  <h2
+    class="title is-2 has-text-centered"
+  >
     Visual Dictionary
-  </h1>
+  </h2>
   <div
     class="SearchBox"
   >
     <form
       class="SearchBox__Form"
     >
-      <input
-        class="SearchBox__Input"
-        placeholder="Define ..."
-        type="text"
-        value=""
-      />
-      <button>
-        Define
-      </button>
+      <div
+        class="field has-addons"
+      >
+        <div
+          class="SearchBox__Input-Control control"
+        >
+          <input
+            class="SearchBox__Input input"
+            placeholder="Define ..."
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          class="SearchBox__Button-Control control"
+        >
+          <button
+            class="button"
+          >
+            Define
+          </button>
+        </div>
+      </div>
     </form>
   </div>
   <div

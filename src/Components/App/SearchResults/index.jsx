@@ -1,6 +1,7 @@
 import React from "react"
 import { arrayOf, shape } from "prop-types"
 import LexicalEntry from "./Components/LexicalEntry"
+import "./SearchResults.sass"
 
 const renderResultItem = entry => {
   return (

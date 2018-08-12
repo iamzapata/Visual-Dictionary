@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { arrayOf, boolean, func, shape, string } from "prop-types"
+import "./SearchBox.sass"
 
 class SearchBox extends Component {
   state = {
@@ -47,23 +48,31 @@ class SearchBox extends Component {
           className="SearchBox__Form"
           onSubmit={ev => this.onSubmitSearch(ev)}
         >
-          <input
-            type="text"
-            className="SearchBox__Input"
-            onChange={this.onInputChange}
-            placeholder="Define ..."
-            value={inputValue}
-          />
+          <div className="field has-addons">
+            <div className="SearchBox__Input-Control control">
+              <input
+                type="text"
+                className="SearchBox__Input input"
+                onChange={this.onInputChange}
+                placeholder="Define ..."
+                value={inputValue}
+              />
+            </div>
+            <div className="SearchBox__Button-Control control">
+              <button className="button">Define</button>
+            </div>
+          </div>
           {showEmptySearchError && (
-            <span className="ErrorMessage">
+            <p className="ErrorMessage">
               Please type the word you want to search for
-            </span>
+            </p>
           )}
           {showNoResultsError &&
             !showEmptySearchError && (
-              <span className="ErrorMessage">No results for your search</span>
+              <p className="ErrorMessage">
+                No results for <b>{inputValue}</b>
+              </p>
             )}
-          <button>Define</button>
         </form>
       </div>
     )

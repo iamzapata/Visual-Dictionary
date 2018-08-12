@@ -1,6 +1,7 @@
 import React from "react"
-import { render, cleanup, fireEvent } from "react-testing-library"
+import { render, cleanup, fireEvent, getByText } from "react-testing-library"
 import SearchBox from "./index.jsx"
+import "jest-dom/extend-expect"
 
 describe("<SearchBox />", () => {
   afterEach(cleanup)
@@ -142,9 +143,20 @@ describe("<SearchBox />", () => {
       SearchStore: { err: { message: "NOT FOUND" } }
     }
 
-    const { queryByText } = render(<SearchBox {...props} />)
+    const { queryByText, queryByPlaceholderText } = render(
+      <SearchBox {...props} />
+    )
 
-    expect(queryByText(noResultsErrorMessage)).not.toBeNull()
+    const inputNode = queryByPlaceholderText("Define ...")
+
+    inputNode.value = "nopenope"
+    fireEvent.change(inputNode)
+
+    const a = queryByText(
+      (_, element) => element.textContent === "No results for nopenope"
+    )
+
+    expect(a).toBeInTheDocument()
   })
 
   it("Should not show no results message unless form is submitted", () => {
