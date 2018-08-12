@@ -17,11 +17,30 @@ module.exports = {
         use: {
           loader: "babel-loader"
         }
+      },
+      {
+        test: /\.(sass|scss)$/,
+        use: [
+          {
+            loader: "style-loader",
+            options: {
+              singleton: true
+            }
+          },
+          {
+            loader: "css-loader",
+            options: {
+              sourceMap: true
+            }
+          },
+          { loader: "postcss-loader" },
+          { loader: "sass-loader" }
+        ]
       }
     ]
   },
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: [".js", ".jsx", ".sass"],
     modules: ["node_modules"],
     alias: {
       Components: path.resolve(__dirname, "src/Components"),
