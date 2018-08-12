@@ -7,6 +7,7 @@ const renderResultItem = entry => {
   return (
     <li key={entry.id}>
       <LexicalEntry entry={entry} />
+      <hr />
     </li>
   )
 }

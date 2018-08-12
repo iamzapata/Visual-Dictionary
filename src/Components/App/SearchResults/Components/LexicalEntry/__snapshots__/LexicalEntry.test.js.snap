@@ -4,7 +4,9 @@ exports[`<LexicalEntry /> Should render self 1`] = `
 <div
   class="LexicalEntry"
 >
-  <h4>
+  <h4
+    class="title is-4"
+  >
     privacy
   </h4>
   <h5>
@@ -12,27 +14,41 @@ exports[`<LexicalEntry /> Should render self 1`] = `
   </h5>
   <div>
     <span>
+      /
       <span>
         prɪvəsi
       </span>
-      <span>
-        <span>
-          British English
+      /
+      <p>
+        <span
+          class="Dialects"
+        >
+          <span>
+            British English
+          </span>
         </span>
-        <button>
+        <button
+          class="PlayAudioButton"
+        >
           ►
         </button>
-      </span>
+      </p>
     </span>
     <span>
+      /
       <span>
         prʌɪvəsi
       </span>
-      <span>
-        <span>
-          British English
+      /
+      <p>
+        <span
+          class="Dialects"
+        >
+          <span>
+            British English
+          </span>
         </span>
-      </span>
+      </p>
     </span>
   </div>
 </div>
