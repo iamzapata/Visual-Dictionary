@@ -26,7 +26,7 @@ exports[`<SearchBox /> Should render self 1`] = `
         <button
           class="button"
         >
-          Define
+          Search
         </button>
       </div>
     </div>

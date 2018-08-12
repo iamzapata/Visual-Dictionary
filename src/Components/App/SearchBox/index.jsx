@@ -59,7 +59,7 @@ class SearchBox extends Component {
               />
             </div>
             <div className="SearchBox__Button-Control control">
-              <button className="button">Define</button>
+              <button className="button">Search</button>
             </div>
           </div>
           {showEmptySearchError && (

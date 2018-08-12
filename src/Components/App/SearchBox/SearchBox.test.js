@@ -42,7 +42,7 @@ describe("<SearchBox />", () => {
 
   it("Should have a submit button", () => {
     const { queryByText } = render(<SearchBox {...createProps()} />)
-    const submitButton = queryByText("Define")
+    const submitButton = queryByText("Search")
 
     expect(submitButton).toBeTruthy()
   })
@@ -75,7 +75,7 @@ describe("<SearchBox />", () => {
     const { queryByText, queryByPlaceholderText } = render(
       <SearchBox {...props} />
     )
-    const button = queryByText("Define")
+    const button = queryByText("Search")
     const input = queryByPlaceholderText("Define ...")
 
     input.value = "flamingo"
