@@ -71,7 +71,8 @@ describe("SearchBox reducer", () => {
   it("Should handle SEARCH_WORD_FAILURE", () => {
     const failureActionPayload = {
       isLoading: false,
-      err: new Error()
+      err: new Error(),
+      results: []
     }
 
     expect(

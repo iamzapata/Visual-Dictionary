@@ -25,7 +25,8 @@ export default function SearchStore(state = defaultState, action) {
       return {
         ...state,
         isLoading,
-        err
+        err,
+        results: []
       }
     default:
       return state
