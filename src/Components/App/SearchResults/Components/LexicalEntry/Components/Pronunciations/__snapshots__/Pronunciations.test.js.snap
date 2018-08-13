@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Pronunciations /> Should render self 1`] = `
+<div>
+  <span>
+    /
+    <span>
+      Jiberish
+    </span>
+    /
+    <p>
+      <span
+        class="Dialects"
+      >
+        <span>
+          High Valyrian
+        </span>
+      </span>
+      <button
+        class="PlayAudioButton"
+      >
+        ►
+      </button>
+    </p>
+  </span>
+</div>
+`;
