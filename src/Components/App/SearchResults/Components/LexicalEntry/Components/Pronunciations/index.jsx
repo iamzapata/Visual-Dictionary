@@ -3,7 +3,8 @@ import { arrayOf, shape, string } from "prop-types"
 import PlayAudioButton from "Components/App/SearchResults/Components/PlayAudioButton"
 
 const Pronunciations = ({ pronunciations }) => (
-  <div>
+  <div className="Pronunciations">
+    <h6 className="title is-6">Pronunciations:</h6>
     {pronunciations.map(p => (
       <span key={p.id}>
         /<span>{p.phoneticSpelling}</span>/

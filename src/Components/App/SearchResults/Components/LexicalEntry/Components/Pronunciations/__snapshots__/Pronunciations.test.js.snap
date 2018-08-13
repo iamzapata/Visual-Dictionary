@@ -1,7 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Pronunciations /> Should render self 1`] = `
-<div>
+<div
+  class="Pronunciations"
+>
+  <h6
+    class="title is-6"
+  >
+    Pronunciations:
+  </h6>
   <span>
     /
     <span>
