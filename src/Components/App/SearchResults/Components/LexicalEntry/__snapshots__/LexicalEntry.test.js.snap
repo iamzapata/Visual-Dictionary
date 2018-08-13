@@ -9,9 +9,16 @@ exports[`<LexicalEntry /> Should render self 1`] = `
   >
     privacy
   </h4>
-  <h5>
+  <h5
+    class="LexicalCategory is-italic title is-5 has-text-weight-light"
+  >
     Noun
   </h5>
+  <h6
+    class="title is-6"
+  >
+    Pronunciations:
+  </h6>
   <div>
     <span>
       /

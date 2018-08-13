@@ -46,36 +46,7 @@ describe("<LexicalEntry />", () => {
     expect(lexicalCategoryPresence).toBeTruthy()
   })
 
-  it("Should display phonetic spelling", () => {
+  it("Should display etymologies", () => {
     const { queryByText } = render(<LexicalEntry {...createProps()} />)
-
-    const phoneticSpelling = createProps().entry.pronunciations[0]
-      .phoneticSpelling
-
-    const phoneticSpellingPresence = queryByText(phoneticSpelling)
-
-    expect(phoneticSpellingPresence).toBeTruthy()
-  })
-
-  it("Should display dialects", () => {
-    const { queryByText } = render(<LexicalEntry {...createProps()} />)
-
-    const dialects = createProps().entry.pronunciations[0].dialects[0]
-
-    const dialectsPresence = queryByText(dialects)
-
-    expect(dialectsPresence).toBeTruthy()
-  })
-
-  it("Should have a button to play audio files if audio files present", () => {
-    const { container } = render(<LexicalEntry {...createProps()} />)
-
-    const pronunciationsWithAudioFile = mockEntry().pronunciations.filter(
-      p => p.audioFile
-    )
-    const playAudioButton = container.firstChild.getElementsByTagName("button")
-
-    expect(playAudioButton.length).toEqual(pronunciationsWithAudioFile.length)
-    expect(playAudioButton).toBeTruthy()
   })
 })

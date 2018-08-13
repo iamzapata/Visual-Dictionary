@@ -1,32 +1,19 @@
-import React from "react"
+import React, { Fragment } from "react"
 import { arrayOf, shape, string } from "prop-types"
-import PlayAudioButton from "../PlayAudioButton"
 import "./LexicalEntry.sass"
-
-const renderPronunciations = pronunciations => (
-  <div>
-    {pronunciations.map(p => (
-      <span key={p.id}>
-        /<span>{p.phoneticSpelling}</span>/
-        <p>
-          {
-            <span className="Dialects">
-              {p.dialects.map(d => <span key={d}>{d}</span>)}
-            </span>
-          }
-          {p.audioFile && <PlayAudioButton audioFile={p.audioFile} />}
-        </p>
-      </span>
-    ))}
-  </div>
-)
+import Pronunciations from "./Components/Pronunciations"
 
 const LexicalEntry = ({ entry }) => {
   return (
     <div className="LexicalEntry">
       <h4 className="title is-4">{entry.text}</h4>
-      <h7 className="is-italic">{entry.lexicalCategory}</h7>
-      {renderPronunciations(entry.pronunciations)}
+      <h5 className="LexicalCategory is-italic title is-5 has-text-weight-light">
+        {entry.lexicalCategory}
+      </h5>
+      <Fragment>
+        <h6 className="title is-6">Pronunciations:</h6>
+        <Pronunciations pronunciations={entry.pronunciations} />
+      </Fragment>
     </div>
   )
 }
