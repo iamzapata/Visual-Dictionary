@@ -3,11 +3,6 @@ import shortId from "shortid"
 const entrySample = () => ({
   id: shortId.generate(),
   text: "privacy",
-  entries: [
-    {
-      id: shortId.generate()
-    }
-  ],
   language: "es",
   lexicalCategory: "Noun",
   pronunciations: [
@@ -21,6 +16,13 @@ const entrySample = () => ({
       id: shortId.generate(),
       phoneticSpelling: "prʌɪvəsi",
       dialects: ["British English"]
+    }
+  ],
+  entries: [
+    {
+      id: shortId.generate(),
+      etymologies: ["Lorem ipsum dolor sit amet, consectetuer adipiscing elit"],
+      senses: []
     }
   ]
 })

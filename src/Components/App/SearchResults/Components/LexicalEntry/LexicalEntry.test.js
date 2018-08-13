@@ -48,5 +48,11 @@ describe("<LexicalEntry />", () => {
 
   it("Should display etymologies", () => {
     const { queryByText } = render(<LexicalEntry {...createProps()} />)
+
+    const etymologies = createProps().entry.entries[0].etymologies[0]
+
+    const etymologiesPresence = queryByText(etymologies)
+
+    expect(etymologiesPresence).toBeTruthy()
   })
 })

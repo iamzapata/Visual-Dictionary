@@ -41,7 +41,7 @@ describe("<SearchResults />", () => {
 
     const { container } = render(<SearchResults results={results} />)
 
-    const listItems = container.querySelectorAll("li")
+    const listItems = container.querySelectorAll(".SearchResults > ul > li")
 
     expect(listItems.length).toEqual(3)
   })

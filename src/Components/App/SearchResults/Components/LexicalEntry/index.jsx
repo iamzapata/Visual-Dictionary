@@ -1,7 +1,17 @@
-import React, { Fragment } from "react"
+import React from "react"
 import { arrayOf, shape, string } from "prop-types"
 import "./LexicalEntry.sass"
 import Pronunciations from "./Components/Pronunciations"
+
+const renderEtymologies = entry => {
+  const etymologies = entry.entries.map(en => en.etymologies).filter(en => en)
+  return (
+    <div>
+      <h6 className="title is-6">Origin:</h6>
+      <ul>{etymologies.map(et => <li key={et}>{et}</li>)}</ul>
+    </div>
+  )
+}
 
 const LexicalEntry = ({ entry }) => {
   return (
@@ -10,10 +20,8 @@ const LexicalEntry = ({ entry }) => {
       <h5 className="LexicalCategory is-italic title is-5 has-text-weight-light">
         {entry.lexicalCategory}
       </h5>
-      <Fragment>
-        <h6 className="title is-6">Pronunciations:</h6>
-        <Pronunciations pronunciations={entry.pronunciations} />
-      </Fragment>
+      <Pronunciations pronunciations={entry.pronunciations} />
+      {renderEtymologies(entry)}
     </div>
   )
 }
