@@ -65,7 +65,9 @@ exports[`<SearchResults /> Should render self 1`] = `
         >
           <ul />
         </div>
-        <div>
+        <div
+          class="Etymologies"
+        >
           <h6
             class="title is-6"
           >

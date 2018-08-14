@@ -22,10 +22,7 @@ module.exports = {
         test: /\.(sass|scss)$/,
         use: [
           {
-            loader: "style-loader",
-            options: {
-              singleton: true
-            }
+            loader: "style-loader"
           },
           {
             loader: "css-loader",

@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Etymologies /> Should render self 1`] = `
+<div
+  class="Etymologies"
+>
+  <h6
+    class="title is-6"
+  >
+    Origin:
+  </h6>
+  <ul>
+    <li>
+      a
+      b
+    </li>
+  </ul>
+</div>
+`;
