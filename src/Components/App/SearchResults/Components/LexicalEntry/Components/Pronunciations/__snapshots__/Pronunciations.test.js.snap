@@ -4,11 +4,6 @@ exports[`<Pronunciations /> Should render self 1`] = `
 <div
   class="Pronunciations"
 >
-  <h6
-    class="title is-6"
-  >
-    Pronunciations:
-  </h6>
   <span>
     /
     <span>

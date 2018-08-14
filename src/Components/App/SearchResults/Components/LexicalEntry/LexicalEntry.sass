@@ -1,6 +1,21 @@
+body
+  counter-reset: wordSection
+
 .LexicalEntry
+  counter-reset: definitionSection
   h4, h5
     display: inline-block
+
+  h4.title
+    position: relative
+    margin-right: 5px
+
+  > h4.title::after
+    counter-increment: wordSection
+    content: counter(wordSection)
+    font-weight: bolder
+    position: absolute
+    font-size: 10px
 
   .Dialects
     margin: 0 5px 0 0
@@ -11,3 +26,8 @@
 
   .Pronunciations
     margin: 0 0 15px 0
+
+  .Definition::before
+    counter-increment: definitionSection
+    content: counter(definitionSection)
+    font-weight: bolder

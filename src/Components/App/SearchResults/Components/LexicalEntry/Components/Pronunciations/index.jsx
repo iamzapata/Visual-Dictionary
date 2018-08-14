@@ -4,7 +4,6 @@ import PlayAudioButton from "Components/App/SearchResults/Components/PlayAudioBu
 
 const Pronunciations = ({ pronunciations }) => (
   <div className="Pronunciations">
-    <h6 className="title is-6">Pronunciations:</h6>
     {pronunciations.map(p => (
       <span key={p.id}>
         /<span>{p.phoneticSpelling}</span>/

@@ -17,11 +17,6 @@ exports[`<LexicalEntry /> Should render self 1`] = `
   <div
     class="Pronunciations"
   >
-    <h6
-      class="title is-6"
-    >
-      Pronunciations:
-    </h6>
     <span>
       /
       <span>
@@ -59,6 +54,11 @@ exports[`<LexicalEntry /> Should render self 1`] = `
         </span>
       </p>
     </span>
+  </div>
+  <div
+    class="Senses"
+  >
+    <ul />
   </div>
   <div>
     <h6
