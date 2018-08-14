@@ -6,7 +6,8 @@ describe("SearchBox reducer", () => {
     expect(SearchBoxReducer(undefined, {})).toEqual({
       isLoading: false,
       err: null,
-      results: []
+      results: [],
+      imageResults: []
     })
   })
 
@@ -14,6 +15,7 @@ describe("SearchBox reducer", () => {
     const requestActionPayload = {
       isLoading: true,
       results: [],
+      imageResults: [],
       err: null
     }
 
@@ -72,7 +74,8 @@ describe("SearchBox reducer", () => {
     const failureActionPayload = {
       isLoading: false,
       err: new Error(),
-      results: []
+      results: [],
+      imageResults: []
     }
 
     expect(
