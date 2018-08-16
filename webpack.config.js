@@ -2,6 +2,7 @@ const path = require("path")
 const webpack = require("webpack")
 const DotenvPlugin = require("webpack-dotenv-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
 module.exports = {
   entry: { main: "./src/index.js" },
@@ -23,6 +24,14 @@ module.exports = {
         use: [
           {
             loader: "style-loader"
+          },
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              // you can specify a publicPath here
+              // by default it use publicPath in webpackOptions.output
+              publicPath: "../"
+            }
           },
           {
             loader: "css-loader",
@@ -65,6 +74,10 @@ module.exports = {
       APP_KEY: JSON.stringify(process.env.APP_KEY),
       GOOGLE_SEARCH_KEY: JSON.stringify(process.env.GOOGLE_SEARCH_KEY),
       GOOGLE_SEARCH_ENGINE: JSON.stringify(process.env.GOOGLE_SEARCH_ENGINE)
+    }),
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css"
     })
   ]
 }
