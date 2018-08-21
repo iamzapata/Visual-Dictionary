@@ -11,6 +11,7 @@
     "browser": true
   },
   "globals": {
+    "jest": true,
     "API_URL": true,
     "APP_ID": true,
     "APP_KEY": true,
