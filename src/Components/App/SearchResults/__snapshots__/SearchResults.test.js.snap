@@ -4,7 +4,149 @@ exports[`<SearchResults /> Should render self 1`] = `
 <div
   class="SearchResults"
 >
-  <ul>
+  <div
+    class="SearchResults__Images"
+  >
+    <div
+      class="slick-slider slick-initialized"
+    >
+      
+      <div
+        class="slick-list"
+      >
+        <div
+          class="slick-track"
+          style="opacity: 1; transform: translate3d(0px, 0px, 0px);"
+        >
+          <div
+            aria-hidden="false"
+            class="slick-slide slick-active slick-current"
+            data-index="0"
+            style="outline: none; width: 0px;"
+            tabindex="-1"
+          >
+            <div>
+              <a
+                href="link1"
+                style="width: 100%; display: inline-block;"
+                tabindex="-1"
+                target="_blank"
+              >
+                <img
+                  alt=""
+                />
+              </a>
+            </div>
+          </div>
+          <div
+            aria-hidden="false"
+            class="slick-slide slick-active"
+            data-index="1"
+            style="outline: none; width: 0px;"
+            tabindex="-1"
+          >
+            <div>
+              <a
+                href="link2"
+                style="width: 100%; display: inline-block;"
+                tabindex="-1"
+                target="_blank"
+              >
+                <img
+                  alt=""
+                />
+              </a>
+            </div>
+          </div>
+          <div
+            aria-hidden="false"
+            class="slick-slide slick-active"
+            data-index="2"
+            style="outline: none; width: 0px;"
+            tabindex="-1"
+          >
+            <div>
+              <a
+                href="link3"
+                style="width: 100%; display: inline-block;"
+                tabindex="-1"
+                target="_blank"
+              >
+                <img
+                  alt=""
+                />
+              </a>
+            </div>
+          </div>
+          <div
+            aria-hidden="false"
+            class="slick-slide slick-active slick-cloned"
+            data-index="3"
+            style="width: 0px;"
+            tabindex="-1"
+          >
+            <div>
+              <a
+                href="link1"
+                style="width: 100%; display: inline-block;"
+                tabindex="-1"
+                target="_blank"
+              >
+                <img
+                  alt=""
+                />
+              </a>
+            </div>
+          </div>
+          <div
+            aria-hidden="true"
+            class="slick-slide slick-cloned"
+            data-index="4"
+            style="width: 0px;"
+            tabindex="-1"
+          >
+            <div>
+              <a
+                href="link2"
+                style="width: 100%; display: inline-block;"
+                tabindex="-1"
+                target="_blank"
+              >
+                <img
+                  alt=""
+                />
+              </a>
+            </div>
+          </div>
+          <div
+            aria-hidden="true"
+            class="slick-slide slick-cloned"
+            data-index="5"
+            style="width: 0px;"
+            tabindex="-1"
+          >
+            <div>
+              <a
+                href="link3"
+                style="width: 100%; display: inline-block;"
+                tabindex="-1"
+                target="_blank"
+              >
+                <img
+                  alt=""
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+    </div>
+  </div>
+  <ul
+    class="SearchResults__Definitions"
+  >
     <li>
       <div
         class="LexicalEntry"

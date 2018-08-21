@@ -7,7 +7,12 @@ describe("<SearchResults />", () => {
   afterEach(cleanup)
 
   const createProps = () => ({
-    results: [entrySample()]
+    results: [entrySample()],
+    imageResults: [
+      { link: "link1", image: { thumbnailLink: "thumbnailLink1" } },
+      { link: "link2", image: { thumbnailLink: "thumbnailLink2" } },
+      { link: "link3", image: { thumbnailLink: "thumbnailLink3" } }
+    ]
   })
 
   it("Should render self", () => {
@@ -39,10 +44,27 @@ describe("<SearchResults />", () => {
       { ...entrySample() }
     ]
 
-    const { container } = render(<SearchResults results={results} />)
+    const props = {
+      ...createProps(),
+      results
+    }
 
-    const listItems = container.querySelectorAll(".SearchResults > ul > li")
+    const { container } = render(<SearchResults {...props} />)
 
+    const listItems = container.querySelectorAll(
+      ".SearchResults > ul.SearchResults__Definitions > li"
+    )
+
+    expect(listItems.length).toEqual(3)
+  })
+
+  it("Should display a list of result images", () => {
+    const { container, debug } = render(<SearchResults {...createProps()} />)
+
+    const listItems = container.querySelectorAll(
+      ".SearchResults > .SearchResults__Images img"
+    )
+    debug()
     expect(listItems.length).toEqual(3)
   })
 })
