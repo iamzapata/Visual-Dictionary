@@ -43,7 +43,28 @@ exports[`<App /> Should render self 1`] = `
   <div
     class="SearchResults"
   >
-    <ul />
+    <div
+      class="SearchResults__Images"
+    >
+      <div
+        class="slick-slider slick-initialized"
+      >
+        
+        <div
+          class="slick-list"
+        >
+          <div
+            class="slick-track"
+            style="opacity: 1; transform: translate3d(0px, 0px, 0px);"
+          />
+        </div>
+        
+        
+      </div>
+    </div>
+    <ul
+      class="SearchResults__Definitions"
+    />
   </div>
 </div>
 `;

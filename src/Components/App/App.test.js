@@ -5,9 +5,10 @@ import { App } from "./index.jsx"
 describe("<App />", () => {
   const createProps = () => ({
     searchWord: jest.fn(),
-    SearchStore: { results: [] },
+    SearchStore: {},
     header: "Visual Dictionary",
     lexicalEntries: [],
+    imageResults: [],
     isLoading: false
   })
 

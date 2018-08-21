@@ -5,7 +5,10 @@ import SearchBox from "Components/App/SearchBox"
 import SearchResults from "Components/App/SearchResults"
 import { connect } from "react-redux"
 import searchWord from "Components/App/actions"
-import lexicalEntriesSelector from "Components/App/reducers/selectors"
+import {
+  lexicalEntriesSelector,
+  imageResultsSelector
+} from "Components/App/reducers/selectors"
 import "./App.sass"
 
 export const App = ({
@@ -13,6 +16,7 @@ export const App = ({
   isLoading,
   searchWord,
   SearchStore,
+  imageResults,
   lexicalEntries
 }) => (
   <div className="App">
@@ -23,7 +27,7 @@ export const App = ({
         <FadeLoader />
       </div>
     )}
-    <SearchResults results={lexicalEntries} />
+    <SearchResults results={lexicalEntries} imageResults={imageResults} />
   </div>
 )
 
@@ -35,6 +39,7 @@ App.propTypes = {
     results: arrayOf(shape({ shape }))
   }).isRequired,
   lexicalEntries: arrayOf(shape({})).isRequired,
+  imageResults: arrayOf(shape({})).isRequired,
   isLoading: bool.isRequired
 }
 
@@ -45,7 +50,8 @@ const mapDispatchToProps = {
 const mapStateToProps = state => ({
   SearchStore: state.SearchStore,
   lexicalEntries: lexicalEntriesSelector(state),
-  isLoading: state.SearchStore.isLoading
+  isLoading: state.SearchStore.isLoading,
+  imageResults: imageResultsSelector(state)
 })
 
 export default connect(
