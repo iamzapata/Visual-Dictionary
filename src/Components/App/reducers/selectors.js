@@ -30,4 +30,13 @@ const lexicalEntriesSelector = createSelector([getLexicalEntries], results => {
   return []
 })
 
-export default lexicalEntriesSelector
+const getResultImages = state => state.SearchStore.imageResults
+
+const imageResultsSelector = createSelector([getResultImages], imageResults =>
+  imageResults.map(imageResult => ({
+    link: imageResult.link,
+    thumbnailLink: imageResult.image.thumbnailLink
+  }))
+)
+
+export { lexicalEntriesSelector, imageResultsSelector }
