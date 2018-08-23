@@ -1,7 +1,7 @@
 {
   "name": "VisualDictionary",
   "version": "1.0.0",
-  "description": "Dictionary that displays images and definitions of search terms. Also allows search by image\"",
+  "description": "Dictionary that displays images and definitions of search terms.",
   "repository": "url",
   "author": "Andres Zapata",
   "license": "MIT",

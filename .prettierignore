@@ -2,3 +2,4 @@ src/index.html
 dist/
 src/**/*.test.js.snap
 src/**/*.sass
+coverage/**/*
