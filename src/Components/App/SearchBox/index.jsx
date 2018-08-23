@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { arrayOf, boolean, func, shape, string } from "prop-types"
+import SuggestionLink from "./Compnents/SuggestionLink"
 import "./SearchBox.sass"
 
 class SearchBox extends Component {
@@ -40,8 +41,27 @@ class SearchBox extends Component {
     this.setState({ inputValue })
   }
 
+  triggerSearchWord = inputValue => {
+    this.setState({ inputValue }, () => {
+      this.props.searchWord(inputValue)
+    })
+  }
+
+  renderSuggestions = () => {
+    return this.props.suggestions.map((suggestion, index) => (
+      <SuggestionLink
+        triggerSearchWord={this.triggerSearchWord}
+        key={suggestion}
+        suggestion={suggestion}
+      >
+        {(index ? ", " : "") + suggestion.trim()}
+      </SuggestionLink>
+    ))
+  }
+
   render() {
     const { inputValue, showEmptySearchError, showNoResultsError } = this.state
+    const { suggestions } = this.props
     return (
       <div className="SearchBox">
         <form
@@ -73,6 +93,11 @@ class SearchBox extends Component {
                 No results for <b>{inputValue}</b>
               </p>
             )}
+          {suggestions.length > 0 && (
+            <div className="Suggestions">
+              Perhaps you meant: {this.renderSuggestions()}
+            </div>
+          )}
         </form>
       </div>
     )
@@ -85,7 +110,8 @@ SearchBox.propTypes = {
     err: shape({ message: string }),
     isLoading: boolean,
     results: arrayOf(shape({ shape }))
-  }).isRequired
+  }).isRequired,
+  suggestions: arrayOf(string).isRequired
 }
 
 export default SearchBox

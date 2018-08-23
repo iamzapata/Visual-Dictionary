@@ -19,16 +19,8 @@ describe("<SearchBar /> action creators", () => {
 
   it("should create an action to dispatch request success", () => {
     const response = { medatdata: {}, results: [] }
-    const imageSearchResponse = {
-      context: {},
-      items: [],
-      kind: "",
-      queries: {},
-      searchInformation: {},
-      url: {}
-    }
     const { results } = response
-    const imageResults = imageSearchResponse.items
+    const imageResults = []
     const expectedAction = {
       type: ActionTypes.SEARCH_WORD_SUCCESS,
       err: null,
@@ -36,7 +28,7 @@ describe("<SearchBar /> action creators", () => {
       results,
       imageResults
     }
-    expect(actions.searchWordSuccess(response, imageSearchResponse)).toEqual(
+    expect(actions.searchWordSuccess(response, imageResults)).toEqual(
       expectedAction
     )
   })
@@ -65,21 +57,13 @@ describe("Async <SearchBar /> action creator", () => {
 
   it("Should dispatch SEARCH_WORD_REQUEST and SEARCH_WORD_SUCCESS when entry fetch is done", () => {
     const entriesResponse = { medatdata: {}, results: [] }
-    const imageSearchResponse = {
-      context: {},
-      items: [],
-      kind: "",
-      queries: {},
-      searchInformation: {},
-      url: {}
-    }
     const { results } = entriesResponse
-    const imageResults = imageSearchResponse.items
+    const imageResults = []
     const store = mockStore({})
     fetchMock.getOnce(`${API_URL}/entries/en/lion`, entriesResponse)
     fetchMock.getOnce(
       `https://www.googleapis.com/customsearch/v1?key=&cx=&searchType=image&q=lion`,
-      imageSearchResponse
+      imageResults
     )
 
     const expectedActions = [
@@ -104,7 +88,7 @@ describe("Async <SearchBar /> action creator", () => {
   })
 
   it("Should dispatch SEARCH_WORD_REQUEST and SEARCH_WORD_FAILURE when entry fetch errors", () => {
-    const err = new Error()
+    const err = new Error({ message: "NOT FOUND", stack: "" })
     fetchMock.getOnce(`${API_URL}/entries/en/lion`, () => {
       throw err
     })
@@ -117,6 +101,34 @@ describe("Async <SearchBar /> action creator", () => {
         isLoading: true,
         searchQuery
       },
+      { type: ActionTypes.SEARCH_WORD_FAILURE, err, isLoading: false }
+    ]
+
+    return store.dispatch(searchWord(searchQuery)).then(() => {
+      expect(store.getActions()).toEqual(expectedActions)
+    })
+  })
+
+  it("Should dispatch SEARCH_WORD_MISSPELL_SUGGESTIONS when SEARCH_WORD_FAILURE is dispatched", () => {
+    const searchQuery = "okk"
+    const err = new Error("NOT FOUND")
+    fetchMock.getOnce(`${API_URL}/entries/en/${searchQuery}`, () => {
+      throw err
+    })
+    fetchMock.getOnce(`${API_URL}/search/en?q=${searchQuery}&prefix=false`, {
+      results: []
+    })
+
+    const store = mockStore({})
+
+    const expectedActions = [
+      {
+        type: ActionTypes.SEARCH_WORD_REQUEST,
+        err: null,
+        isLoading: true,
+        searchQuery
+      },
+      { type: ActionTypes.SEARCH_WORD_MISSPELL_SUGGESTIONS, suggestions: [] },
       { type: ActionTypes.SEARCH_WORD_FAILURE, err, isLoading: false }
     ]
 

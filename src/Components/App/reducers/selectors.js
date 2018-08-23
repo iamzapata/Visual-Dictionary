@@ -22,9 +22,16 @@ const lexicalEntriesSelector = createSelector([getLexicalEntries], results => {
         pronunciations: hydrateWithIds(lexicalEntry.pronunciations),
         entries: hydrateWithIds(lexicalEntry.entries)
       }))
-      .map(results => ({
-        ...results,
-        entries: normalizeDefinitions(results.entries)
+      .map(lexicalEntries => ({
+        ...lexicalEntries,
+        pronunciations: lexicalEntries.pronunciations.map(p => ({
+          ...p,
+          dialects: p.dialects ? p.dialects : []
+        }))
+      }))
+      .map(lexicalEntries => ({
+        ...lexicalEntries,
+        entries: normalizeDefinitions(lexicalEntries.entries)
       }))
   }
   return []
@@ -39,4 +46,10 @@ const imageResultsSelector = createSelector([getResultImages], imageResults =>
   }))
 )
 
-export { lexicalEntriesSelector, imageResultsSelector }
+const getSearchSuggestions = state => state.SearchStore.suggestions
+
+const searchSuggestions = createSelector([getSearchSuggestions], suggestions =>
+  suggestions.map(result => result.word)
+)
+
+export { lexicalEntriesSelector, imageResultsSelector, searchSuggestions }

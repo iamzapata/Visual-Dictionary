@@ -1,6 +1,7 @@
 import {
   lexicalEntriesSelector,
-  imageResultsSelector
+  imageResultsSelector,
+  searchSuggestions
 } from "Components/App/reducers/selectors"
 import { type } from "ramda"
 
@@ -18,7 +19,8 @@ const mockState = () => ({
       { link: "link1", image: { thumbnailLink: "thumbnailLink1" } },
       { link: "link2", image: { thumbnailLink: "thumbnailLink2" } },
       { link: "link3", image: { thumbnailLink: "thumbnailLink3" } }
-    ]
+    ],
+    suggestions: [{ word: "ok" }, { word: "lka" }, { word: "ss" }]
   }
 })
 
@@ -49,6 +51,18 @@ describe("image results selector", () => {
     const selected = imageResultsSelector(mockState())
     selected.forEach(image => {
       expect(Object.keys(image).sort()).toEqual(["link", "thumbnailLink"])
+    })
+  })
+
+  describe("Suggestions selector", () => {
+    it("Should return an array of suggestions", () => {
+      const selected = searchSuggestions(mockState())
+      expect(type(selected)).toEqual("Array")
+    })
+
+    it("Should return correct number of entries", () => {
+      const selected = searchSuggestions(mockState())
+      expect(selected.length).toEqual(3)
     })
   })
 })

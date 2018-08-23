@@ -1,6 +1,7 @@
 import React from "react"
 import SearchResults from "./index.jsx"
 import { render, cleanup } from "react-testing-library"
+import "jest-dom/extend-expect"
 import entrySample from "./mocks"
 
 describe("<SearchResults />", () => {
@@ -59,12 +60,11 @@ describe("<SearchResults />", () => {
   })
 
   it("Should display a list of result images", () => {
-    const { container, debug } = render(<SearchResults {...createProps()} />)
+    const { container } = render(<SearchResults {...createProps()} />)
 
     const listItems = container.querySelectorAll(
-      ".SearchResults > .SearchResults__Images img"
+      ".SearchResults > .SearchResults__Images a.Result__Image img"
     )
-    debug()
-    expect(listItems.length).toEqual(3)
+    expect(listItems).toBeTruthy()
   })
 })

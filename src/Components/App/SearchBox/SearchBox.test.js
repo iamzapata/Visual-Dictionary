@@ -1,5 +1,5 @@
 import React from "react"
-import { render, cleanup, fireEvent, getByText } from "react-testing-library"
+import { render, cleanup, fireEvent } from "react-testing-library"
 import SearchBox from "./index.jsx"
 import "jest-dom/extend-expect"
 
@@ -8,7 +8,8 @@ describe("<SearchBox />", () => {
 
   const createProps = () => ({
     searchWord: jest.fn(),
-    SearchStore: {}
+    SearchStore: {},
+    suggestions: []
   })
 
   const emptyInputErrorMessage = "Please type the word you want to search for"
@@ -152,11 +153,33 @@ describe("<SearchBox />", () => {
     inputNode.value = "nopenope"
     fireEvent.change(inputNode)
 
-    const a = queryByText(
+    const textContent = queryByText(
       (_, element) => element.textContent === "No results for nopenope"
     )
 
-    expect(a).toBeInTheDocument()
+    expect(textContent).toBeInTheDocument()
+  })
+
+  it("Should display word suggestions when there are no results", () => {
+    const props = {
+      ...createProps(),
+      suggestions: ["oak", "wok", "ck", "wk", "pk"],
+      SearchStore: { err: { message: "NOT FOUND" } }
+    }
+
+    const { queryByPlaceholderText, queryByText } = render(
+      <SearchBox {...props} />
+    )
+    const inputNode = queryByPlaceholderText("Define ...")
+
+    inputNode.value = "okk"
+    fireEvent.change(inputNode)
+
+    const textContent = queryByText(
+      (_, element) =>
+        element.textContent === "Perhaps you meant: oak, wok, ck, wk, pk"
+    )
+    expect(textContent).toBeInTheDocument()
   })
 
   it("Should not show no results message unless form is submitted", () => {

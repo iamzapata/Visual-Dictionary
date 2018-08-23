@@ -7,7 +7,8 @@ describe("SearchBox reducer", () => {
       isLoading: false,
       err: null,
       results: [],
-      imageResults: []
+      imageResults: [],
+      suggestions: []
     })
   })
 
@@ -16,6 +17,7 @@ describe("SearchBox reducer", () => {
       isLoading: true,
       results: [],
       imageResults: [],
+      suggestions: [],
       err: null
     }
 
@@ -27,16 +29,22 @@ describe("SearchBox reducer", () => {
     ).toEqual({ ...requestActionPayload })
   })
 
-  it("Should clear error when SEARCH_WORD_REQUEST is dispatched", () => {
+  it("Should clear error and suggestions when SEARCH_WORD_REQUEST is dispatched", () => {
     const requestActonPayload = {
       isLoading: true,
       results: [],
-      err: null
+      err: null,
+      suggestions: []
     }
 
     expect(
       SearchBoxReducer(
-        { isLoading: true, err: { message: "NOT FOUND" }, results: [] },
+        {
+          isLoading: true,
+          err: { message: "NOT FOUND" },
+          results: [],
+          suggestions: ["one", "two"]
+        },
         {
           type: ActionTypes.SEARCH_WORD_REQUEST,
           ...requestActonPayload
@@ -87,5 +95,21 @@ describe("SearchBox reducer", () => {
         }
       )
     ).toEqual({ ...failureActionPayload })
+  })
+
+  it("Should handle SEARCH_WORD_MISSPELL_SUGGESTIONS", () => {
+    const noResultsPayloadAction = {
+      suggestions: []
+    }
+
+    expect(
+      SearchBoxReducer(
+        {},
+        {
+          type: ActionTypes.SEARCH_WORD_MISSPELL_SUGGESTIONS,
+          ...noResultsPayloadAction
+        }
+      )
+    ).toEqual({ ...noResultsPayloadAction })
   })
 })

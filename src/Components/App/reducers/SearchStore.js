@@ -4,17 +4,19 @@ const defaultState = {
   isLoading: false,
   err: null,
   results: [],
-  imageResults: []
+  imageResults: [],
+  suggestions: []
 }
 
 export default function SearchStore(state = defaultState, action) {
-  const { type, isLoading, err, results, imageResults } = action
+  const { type, isLoading, err, results, imageResults, suggestions } = action
   switch (type) {
     case ActionTypes.SEARCH_WORD_REQUEST:
       return {
         ...state,
         isLoading,
-        err
+        err,
+        suggestions: []
       }
     case ActionTypes.SEARCH_WORD_SUCCESS:
       return {
@@ -30,6 +32,11 @@ export default function SearchStore(state = defaultState, action) {
         err,
         results: [],
         imageResults: []
+      }
+    case ActionTypes.SEARCH_WORD_MISSPELL_SUGGESTIONS:
+      return {
+        ...state,
+        suggestions
       }
     default:
       return state

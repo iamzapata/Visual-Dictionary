@@ -9,7 +9,8 @@ describe("<App />", () => {
     header: "Visual Dictionary",
     lexicalEntries: [],
     imageResults: [],
-    isLoading: false
+    isLoading: false,
+    suggestions: []
   })
 
   it("Should render self", () => {

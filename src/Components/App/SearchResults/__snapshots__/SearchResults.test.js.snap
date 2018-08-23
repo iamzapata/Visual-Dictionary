@@ -28,6 +28,7 @@ exports[`<SearchResults /> Should render self 1`] = `
             <div>
               <a
                 href="link1"
+                rel="noopener noreferrer"
                 style="width: 100%; display: inline-block;"
                 tabindex="-1"
                 target="_blank"
@@ -48,6 +49,7 @@ exports[`<SearchResults /> Should render self 1`] = `
             <div>
               <a
                 href="link2"
+                rel="noopener noreferrer"
                 style="width: 100%; display: inline-block;"
                 tabindex="-1"
                 target="_blank"
@@ -68,6 +70,7 @@ exports[`<SearchResults /> Should render self 1`] = `
             <div>
               <a
                 href="link3"
+                rel="noopener noreferrer"
                 style="width: 100%; display: inline-block;"
                 tabindex="-1"
                 target="_blank"
@@ -88,6 +91,7 @@ exports[`<SearchResults /> Should render self 1`] = `
             <div>
               <a
                 href="link1"
+                rel="noopener noreferrer"
                 style="width: 100%; display: inline-block;"
                 tabindex="-1"
                 target="_blank"
@@ -108,6 +112,7 @@ exports[`<SearchResults /> Should render self 1`] = `
             <div>
               <a
                 href="link2"
+                rel="noopener noreferrer"
                 style="width: 100%; display: inline-block;"
                 tabindex="-1"
                 target="_blank"
@@ -128,6 +133,7 @@ exports[`<SearchResults /> Should render self 1`] = `
             <div>
               <a
                 href="link3"
+                rel="noopener noreferrer"
                 style="width: 100%; display: inline-block;"
                 tabindex="-1"
                 target="_blank"
