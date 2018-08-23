@@ -6,8 +6,9 @@ import SearchResults from "Components/App/SearchResults"
 import { connect } from "react-redux"
 import searchWord from "Components/App/actions"
 import {
-  lexicalEntriesSelector,
-  imageResultsSelector
+  searchSuggestions,
+  imageResultsSelector,
+  lexicalEntriesSelector
 } from "Components/App/reducers/selectors"
 import "./App.sass"
 
@@ -16,18 +17,27 @@ export const App = ({
   isLoading,
   searchWord,
   SearchStore,
+  suggestions,
   imageResults,
   lexicalEntries
 }) => (
   <div className="App">
     <h2 className="title is-2 has-text-centered">{header}</h2>
-    <SearchBox searchWord={searchWord} SearchStore={SearchStore} />
+    <SearchBox
+      searchWord={searchWord}
+      SearchStore={SearchStore}
+      suggestions={suggestions}
+    />
     {isLoading && (
       <div className="LoadingSpinner">
         <FadeLoader />
       </div>
     )}
-    <SearchResults results={lexicalEntries} imageResults={imageResults} />
+    <SearchResults
+      results={lexicalEntries}
+      imageResults={imageResults}
+      searchWord={searchWord}
+    />
   </div>
 )
 
@@ -40,7 +50,8 @@ App.propTypes = {
   }).isRequired,
   lexicalEntries: arrayOf(shape({})).isRequired,
   imageResults: arrayOf(shape({})).isRequired,
-  isLoading: bool.isRequired
+  isLoading: bool.isRequired,
+  suggestions: arrayOf(string).isRequired
 }
 
 const mapDispatchToProps = {
@@ -49,8 +60,9 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => ({
   SearchStore: state.SearchStore,
-  lexicalEntries: lexicalEntriesSelector(state),
+  suggestions: searchSuggestions(state),
   isLoading: state.SearchStore.isLoading,
+  lexicalEntries: lexicalEntriesSelector(state),
   imageResults: imageResultsSelector(state)
 })
 
