@@ -5,9 +5,10 @@ import "./Definitions.sass"
 const Definitions = ({ entry }) => {
   const senses = entry.entries[0].senses.map(en => ({
     id: en.id,
-    definitions: en.definitions,
+    notes: en.notes,
     examples: en.examples,
-    notes: en.notes
+    definitions: en.definitions,
+    crossReferences: en.crossReferences
   }))
 
   return (
@@ -27,6 +28,13 @@ const Definitions = ({ entry }) => {
                     <p className="Definition" key={def}>
                       {def}.
                     </p>
+                  ))}
+                {sense.crossReferences &&
+                  sense.crossReferences.length > 0 &&
+                  sense.crossReferences.map(cr => (
+                    <div key={cr}>
+                      <i>{cr.type}</i> <span>{cr.text}</span>
+                    </div>
                   ))}
                 <span>
                   {sense.examples &&
