@@ -4,31 +4,18 @@ const checkStatus = response => {
   if (response.ok) {
     return response
   }
-  throw Error(response.statusText)
+  throw new Error(response.status)
 }
 
-function request(url, options = {}, api = API_URL) {
-  const requestUrl = `${api}/${url}`
+function request(url) {
+  const requestUrl = `api/${url}`
 
-  const headers = {
-    "Content-Type": "application/x-www-form-urlencoded",
-    Accept: "application/json",
-    app_id: APP_ID,
-    app_key: APP_KEY
-  }
-
-  if (!options.method) {
-    options.method = "GET"
-  }
-
-  options.headers = {
-    ...headers,
-    ...options.headers
-  }
-
-  return fetch(requestUrl, options)
+  return fetch(requestUrl)
     .then(checkStatus)
     .then(response => response.json())
+    .catch(err => {
+      throw Error(err.message)
+    })
 }
 
 export default request
