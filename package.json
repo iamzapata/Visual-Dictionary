@@ -11,12 +11,15 @@
     "lint": "eslint . --ext .js,.jsx",
     "lint:fix": "eslint . --ext .js,.jsx --fix",
     "start": "NODE_ENV=development webpack-dev-server --mode development --open --hot",
-    "build": "NODE_ENV=production webpack",
+    "server": "node server/index.js",
+    "build": "NODE_ENV=production webpack --mode production",
     "prettier": "prettier --write 'src/**/*'",
     "prettier:watch": "onchange 'src/**/*' -- npx prettier --write {{changed}}"
   },
   "dependencies": {
     "autoprefixer": "^9.1.0",
+    "axios": "^0.18.0",
+    "hapi": "17.x.x",
     "isomorphic-fetch": "^2.2.1",
     "keymirror": "^0.1.1",
     "prop-types": "^15.6.1",
