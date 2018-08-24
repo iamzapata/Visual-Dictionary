@@ -8,7 +8,18 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, "dist"),
     compress: true,
-    port: 9000
+    port: 9000,
+    https: true,
+    index: "./dist/index.html",
+    overlay: {
+      warnings: true,
+      errors: true
+    },
+    proxy: {
+      "/api": {
+        target: "http://localhost:3000"
+      }
+    }
   },
   entry: { main: "./src/index.js" },
   output: {
