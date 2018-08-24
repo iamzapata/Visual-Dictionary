@@ -35,13 +35,10 @@ function displaySuggestions(suggestions) {
 }
 
 function searchImages(queryString) {
-  return request(
-    `v1?key=${GOOGLE_SEARCH_KEY}&cx=${GOOGLE_SEARCH_ENGINE}&searchType=image&q=${queryString}`,
-    {
-      "Content-Type": "application/x-www-form-urlencoded",
-      Accept: "application/json"
-    },
-    "https://www.googleapis.com/customsearch"
+  return fetch(
+    `https://www.googleapis.com/customsearch/v1?
+    key=${GOOGLE_SEARCH_KEY}&cx=${GOOGLE_SEARCH_ENGINE}&searchType=image&q=${queryString}
+    `
   ).then(response => (response.items ? response.items : []))
 }
 
@@ -49,13 +46,12 @@ export default function searchWord(queryString) {
   return async dispatch => {
     dispatch(searchWordRequest(queryString))
     try {
-      const entries = await request(`entries/en/${queryString}`)
+      const entries = await request(`define/${queryString}`)
       const relatedImages = await searchImages(queryString)
       dispatch(searchWordSuccess(entries, relatedImages))
     } catch (err) {
-      if (err.message === "NOT FOUND") {
-        const suggestions = await request(
-          `search/en?q=${queryString}&prefix=false`
+      if (err.message === "404") {
+        const suggestions = await request(`suggestions/${queryString}`
         ).then(response => response.results)
         dispatch(displaySuggestions(suggestions))
       }
