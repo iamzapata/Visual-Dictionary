@@ -116,7 +116,7 @@ module.exports = {
       filename: devMode ? "[name].css" : "[name].[hash].css",
       chunkFilename: devMode ? "[id].css" : "[id].[hash].css"
     }),
-    new CleanWebpackPlugin(["client"]),
+    devMode ? () => ({}) : new CleanWebpackPlugin(["client"]),
     new CompressionPlugin({
       asset: "[path].gz[query]",
       algorithm: "gzip",
