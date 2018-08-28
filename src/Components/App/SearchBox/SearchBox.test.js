@@ -96,7 +96,9 @@ describe("<SearchBox />", () => {
     const form = container.firstChild.querySelector("form")
     const inputNode = queryByPlaceholderText("Define ...")
 
-    inputNode.value = ""
+    fireEvent.change(inputNode, {
+      target: { value: "" }
+    })
     fireEvent.change(inputNode)
     fireEvent.submit(form)
 
@@ -104,8 +106,7 @@ describe("<SearchBox />", () => {
     expect(queryByText(emptyInputErrorMessage)).not.toBeNull()
   })
 
-  /*  it("Should clear error message on input change", () => {
-    expect(true).toBe(true)
+  it("Should clear error message on input change", () => {
     const props = createProps()
     const { container, queryByText, queryByPlaceholderText } = render(
       <SearchBox {...props} />
@@ -113,18 +114,21 @@ describe("<SearchBox />", () => {
     const form = container.firstChild.querySelector("form")
     const inputNode = queryByPlaceholderText("Define ...")
 
-    inputNode.value = ""
-    fireEvent.change(inputNode)
+    fireEvent.change(inputNode, {
+      target: { value: "" }
+    })
     fireEvent.submit(form)
 
     expect(props.searchWord).not.toHaveBeenCalled()
     expect(queryByText(emptyInputErrorMessage)).not.toBeNull()
 
-    inputNode.value = "elephant"
+    fireEvent.change(inputNode, {
+      target: { value: "elephant" }
+    })
     fireEvent.change(inputNode)
 
     expect(queryByText(emptyInputErrorMessage)).toBeNull()
-  })*/
+  })
 
   it("Should not show empty input message when input empty unless form is submitted", () => {
     const props = createProps()
@@ -141,11 +145,10 @@ describe("<SearchBox />", () => {
     expect(queryByText(emptyInputErrorMessage)).toBeNull()
   })
 
-  /*  it("Should display a message when there are no results", () => {
-    expect(true).toEqual(true)
+  it("Should display a message when there are no results", () => {
     const props = {
       ...createProps(),
-      SearchStore: { err: { message: "NOT FOUND" } }
+      SearchStore: { err: { message: "404" } }
     }
 
     const { queryByText, queryByPlaceholderText } = render(
@@ -154,15 +157,15 @@ describe("<SearchBox />", () => {
 
     const inputNode = queryByPlaceholderText("Define ...")
 
-    inputNode.value = "nopenope"
-    fireEvent.change(inputNode)
-
+    fireEvent.change(inputNode, {
+      target: { value: "nopenope" }
+    })
     const textContent = queryByText(
       (_, element) => element.textContent === "No results for nopenope"
     )
 
     expect(textContent).toBeInTheDocument()
-  })*/
+  })
 
   it("Should display word suggestions when there are no results", () => {
     const props = {
@@ -210,11 +213,8 @@ describe("<SearchBox />", () => {
       SearchStore: { err: { message: "NOT FOUND" } }
     }
 
-    const { container, queryByText, queryByPlaceholderText } = render(
-      <SearchBox {...props} />
-    )
+    const { container, queryByText } = render(<SearchBox {...props} />)
     const form = container.firstChild.querySelector("form")
-    const inputNode = queryByPlaceholderText("Define ...")
 
     fireEvent.submit(form)
 
