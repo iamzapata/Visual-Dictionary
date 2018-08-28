@@ -60,9 +60,9 @@ describe("Async <SearchBar /> action creator", () => {
     const { results } = entriesResponse
     const imageResults = []
     const store = mockStore({})
-    fetchMock.getOnce(`${API_URL}/entries/en/lion`, entriesResponse)
+    fetchMock.getOnce(`api/define/lion`, entriesResponse)
     fetchMock.getOnce(
-      `https://www.googleapis.com/customsearch/v1?key=&cx=&searchType=image&q=lion`,
+      `https://www.googleapis.com/customsearch/v1?key=&cx=&searchType=image&q=lion&hl=en&lr=lang_en&gl=US`,
       imageResults
     )
 
@@ -89,7 +89,7 @@ describe("Async <SearchBar /> action creator", () => {
 
   it("Should dispatch SEARCH_WORD_REQUEST and SEARCH_WORD_FAILURE when entry fetch errors", () => {
     const err = new Error({ message: "NOT FOUND", stack: "" })
-    fetchMock.getOnce(`${API_URL}/entries/en/lion`, () => {
+    fetchMock.getOnce(`api/define/lion`, () => {
       throw err
     })
     const store = mockStore({})
@@ -111,11 +111,11 @@ describe("Async <SearchBar /> action creator", () => {
 
   it("Should dispatch SEARCH_WORD_MISSPELL_SUGGESTIONS when SEARCH_WORD_FAILURE is dispatched", () => {
     const searchQuery = "okk"
-    const err = new Error("NOT FOUND")
-    fetchMock.getOnce(`${API_URL}/entries/en/${searchQuery}`, () => {
+    const err = new Error("404")
+    fetchMock.getOnce(`api/define/${searchQuery}`, () => {
       throw err
     })
-    fetchMock.getOnce(`${API_URL}/search/en?q=${searchQuery}&prefix=false`, {
+    fetchMock.getOnce(`api/suggestions/${searchQuery}`, {
       results: []
     })
 

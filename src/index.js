@@ -8,5 +8,5 @@ ReactDOM.render(
   <Provider store={store}>
     <App header="Visual Dictionary" />
   </Provider>,
-  document.getElementById("app-root")
+  document.getElementById("app")
 )
