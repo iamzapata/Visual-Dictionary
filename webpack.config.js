@@ -2,29 +2,51 @@ const path = require("path")
 const webpack = require("webpack")
 const DotenvPlugin = require("webpack-dotenv-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
+const CleanWebpackPlugin = require("clean-webpack-plugin")
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin
+const CompressionPlugin = require("compression-webpack-plugin")
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
+
+const devMode = process.env.NODE_ENV !== "production"
 
 module.exports = {
   devServer: {
-    contentBase: path.join(__dirname, "dist"),
+    contentBase: path.join(__dirname, "client"),
     compress: true,
     port: 9000,
     https: true,
-    index: "./dist/index.html",
+    index: "index.html",
     overlay: {
       warnings: true,
       errors: true
     },
     proxy: {
       "/api": {
-        target: "http://localhost:3000"
+        target: "http://localhost:8080"
       }
-    }
+    },
+    publicPath: "/"
   },
   entry: { main: "./src/index.js" },
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js"
+    path: path.resolve(__dirname, "client"),
+    filename: devMode
+      ? "[name].[hash].bundle.js"
+      : "[name][contenthash].bundle.js"
+  },
+  optimization: {
+    namedChunks: true,
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: true // set to true if you want JS source maps
+      }),
+      new OptimizeCSSAssetsPlugin({})
+    ]
   },
   module: {
     rules: [
@@ -36,19 +58,9 @@ module.exports = {
         }
       },
       {
-        test: /\.(sass|scss)$/,
+        test: /\.(sa|sc|c)ss$/,
         use: [
-          {
-            loader: "style-loader"
-          },
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              // you can specify a publicPath here
-              // by default it use publicPath in webpackOptions.output
-              publicPath: "../"
-            }
-          },
+          devMode ? "style-loader" : MiniCssExtractPlugin.loader,
           {
             loader: "css-loader",
             options: {
@@ -57,6 +69,18 @@ module.exports = {
           },
           { loader: "postcss-loader" },
           { loader: "sass-loader" }
+        ]
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot|svg|gif)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "[name].[ext]",
+              outputPath: "fonts/"
+            }
+          }
         ]
       }
     ]
@@ -74,10 +98,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      inject: true,
-      hash: true,
-      template: "./src/index.html",
-      filename: "index.html"
+      template: "./src/index.html"
     }),
     new DotenvPlugin({
       sample: "./.env.dist",
@@ -92,8 +113,18 @@ module.exports = {
       GOOGLE_SEARCH_ENGINE: JSON.stringify(process.env.GOOGLE_SEARCH_ENGINE)
     }),
     new MiniCssExtractPlugin({
-      filename: "[name].css",
-      chunkFilename: "[id].css"
+      filename: devMode ? "[name].css" : "[name].[hash].css",
+      chunkFilename: devMode ? "[id].css" : "[id].[hash].css"
+    }),
+    new CleanWebpackPlugin(["client"]),
+    new CompressionPlugin({
+      asset: "[path].gz[query]",
+      algorithm: "gzip",
+      test: /\.js$|\.css$/
     })
   ]
+}
+
+if (process.env.BUNDLE_ANALYZER) {
+  module.exports.plugins.push(new BundleAnalyzerPlugin())
 }
