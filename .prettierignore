@@ -1,5 +1,5 @@
 src/index.html
-dist/
+client/
 src/**/*.test.js.snap
 src/**/*.sass
 coverage/**/*
