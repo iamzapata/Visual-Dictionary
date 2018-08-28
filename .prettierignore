@@ -1,5 +1,12 @@
 src/index.html
 client/
 src/**/*.test.js.snap
-src/**/*.sass
+
 coverage/**/*
+*.eot
+*.svg
+*.ttf
+*.woff
+*.woff2
+*.svg
+*.ttf
