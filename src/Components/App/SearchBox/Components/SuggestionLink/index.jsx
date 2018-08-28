@@ -1,6 +1,6 @@
 import React from "react"
 import { func, string } from "prop-types"
-import "./SuggestionLink.sass"
+import "./SuggestionLink.scss"
 
 const SuggestionLink = ({ triggerSearchWord, suggestion, children }) => (
   <button

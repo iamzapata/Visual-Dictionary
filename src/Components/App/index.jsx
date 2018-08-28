@@ -10,7 +10,7 @@ import {
   imageResultsSelector,
   lexicalEntriesSelector
 } from "Components/App/reducers/selectors"
-import "./App.sass"
+import "./App.scss"
 
 export const App = ({
   header,

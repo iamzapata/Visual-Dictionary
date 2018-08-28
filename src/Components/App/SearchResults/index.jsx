@@ -2,7 +2,7 @@ import React, { PureComponent } from "react"
 import { arrayOf, shape, string } from "prop-types"
 import Slider from "react-slick"
 import LexicalEntry from "./Components/LexicalEntry"
-import "./SearchResults.sass"
+import "./SearchResults.scss"
 
 const sliderSettings = {
   className: "",

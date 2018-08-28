@@ -1,6 +1,6 @@
 import React from "react"
 import { arrayOf, shape, string } from "prop-types"
-import "./LexicalEntry.sass"
+import "./LexicalEntry.scss"
 import Pronunciations from "./Components/Pronunciations"
 import Definitions from "./Components/Definitions"
 import Etymologies from "./Components/Etymologies"

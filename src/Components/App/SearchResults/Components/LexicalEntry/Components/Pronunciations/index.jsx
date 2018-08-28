@@ -10,7 +10,9 @@ const Pronunciations = ({ pronunciations }) => (
         <p>
           {p.dialects && (
             <span className="Dialects">
-              {p.dialects.map(d => <span key={d}>{d}</span>)}
+              {p.dialects.map(d => (
+                <span key={d}>{d}</span>
+              ))}
             </span>
           )}
           {p.audioFile && <PlayAudioButton audioFile={p.audioFile} />}

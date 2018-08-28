@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { arrayOf, boolean, func, shape, string } from "prop-types"
-import SuggestionLink from "./Compnents/SuggestionLink"
-import "./SearchBox.sass"
+import SuggestionLink from "./Components/SuggestionLink"
+import "./SearchBox.scss"
 
 class SearchBox extends Component {
   state = {

@@ -1,6 +1,6 @@
 import React from "react"
 import { shape, string, arrayOf } from "prop-types"
-import "./Definitions.sass"
+import "./Definitions.scss"
 
 const Definitions = ({ entry }) => {
   const senses = entry.entries[0].senses.map(en => ({
