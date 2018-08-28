@@ -1,13 +1,13 @@
 {
   "presets": [
-    "react",
-    "env"
+    "@babel/preset-react",
+    "@babel/preset-env"
   ],
   "plugins": [
     "emotion",
-    "transform-runtime",
+    "@babel/plugin-transform-runtime",
     "transform-class-properties",
-    "transform-async-to-generator",
+    "@babel/transform-async-to-generator",
     "transform-object-rest-spread"
   ]
 }
